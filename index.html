@@ -7,7 +7,9 @@
     <meta name="description" content="Rprofiling : breaking down racial profiling">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
+    <link href="stylesheets/simple-slider.css" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="javascripts/simple-slider.js" type="text/javascript"></script>
     <title>Rprofiling</title>
   </head>
 
@@ -18,39 +20,40 @@
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/mirthbottle/rprofiling">View on GitHub</a>
 
-          <h1 id="project_title">Rprofiling</h1>
-          <h2 id="project_tagline">breaking down racial profiling</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/mirthbottle/rprofiling/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/mirthbottle/rprofiling/tarball/master">Download this project as a tar.gz file</a>
-            </section>
+          <h1 id="project_title">Racial Profiling</h1>
+          <h2 id="project_tagline">reasoning about racial profiling</h2>
         </header>
     </div>
 
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>
-<a name="its-no-secret-that-african-americans-are-over-represented-in-the-criminal-justice-system--based-on-this-fact-it-is-widely-believed-that-black-people-simply-commit-more-crimes-than-white-people--on-its-face-racial-profiling-seems-like-an-efficient-way-to-catch-criminals--however-to-rephrase-the-obvious-racial-profiling-really-just-means-that-you-will-catch-a-higher-percentage-of-the-black-criminals-causing-them-to-be-overly-represented-among-the-criminals-that-you-catch--this-is-an-attempt-to-demonstrate-that-the-results-tend-to-reinforce-prejudices-because-human-beings-are-not-good-at-reasoning-about-probability-and-cause" class="anchor" href="#its-no-secret-that-african-americans-are-over-represented-in-the-criminal-justice-system--based-on-this-fact-it-is-widely-believed-that-black-people-simply-commit-more-crimes-than-white-people--on-its-face-racial-profiling-seems-like-an-efficient-way-to-catch-criminals--however-to-rephrase-the-obvious-racial-profiling-really-just-means-that-you-will-catch-a-higher-percentage-of-the-black-criminals-causing-them-to-be-overly-represented-among-the-criminals-that-you-catch--this-is-an-attempt-to-demonstrate-that-the-results-tend-to-reinforce-prejudices-because-human-beings-are-not-good-at-reasoning-about-probability-and-cause"><span class="octicon octicon-link"></span></a>It's no secret that African Americans are over-represented in the criminal justice system.  Based on this fact, it is widely believed that black people simply commit more crimes than white people*.  On its face, racial profiling seems like an efficient way to catch criminals.  However, to rephrase the obvious, racial profiling really just means that you will catch a <strong>higher percentage</strong> of the black criminals, causing them to be overly represented among the criminals that you catch.  This is an attempt to demonstrate that the results tend to reinforce prejudices (because human beings are not good at reasoning about probability and cause).</h3>
+        <p>
+It's no secret that African Americans are over-represented in the criminal justice system.  Based on this fact, it is widely believed that black people simply commit more crimes than white people*.  On its face, racial profiling seems like an efficient way to catch criminals.  However, to rephrase the obvious, racial profiling really just means that you will catch a <strong>higher percentage</strong> of the black criminals, causing them to be overly represented among the criminals that you catch.  This is an attempt to demonstrate that the results tend to <strong>reinforce prejudices</strong> (because human beings are not good at reasoning about probability and cause).</p>
 
 <h1>
 <a name="example-with-shoplifting" class="anchor" href="#example-with-shoplifting"><span class="octicon octicon-link"></span></a>example with shoplifting</h1>
 
 <h4>
-<a name="yes-this-is-a-controversial-subject-but-its-a-simple-example-to-demonstrate-the-relationship-between-racial-profiling-and-stereotypes" class="anchor" href="#yes-this-is-a-controversial-subject-but-its-a-simple-example-to-demonstrate-the-relationship-between-racial-profiling-and-stereotypes"><span class="octicon octicon-link"></span></a>Yes, this is a controversial subject, but it's a simple example to demonstrate the relationship between racial profiling and stereotypes.</h4>
+Yes, this is a controversial subject, but it's a simple example to demonstrate the relationship between racial profiling and stereotypes.</h4>
 
 <p>(to be included, graph with things shaded to show these percentages)
-% black shoppers
-% white shoppers</p>
+<input type='text' name='b_shoppers' id='b_shoppers' value='0.1' onchange='catch_shoplifters()' data-slider="true" data-slider-step="0.01" data-slider-range="0, 1"> % black shoppers
 
-<p>% black shoppers who shoplift
-% white shoppers who shoplift</p>
+<p>
+<input type='text' name='b_shoplifters' id='b_shoplifters' value='10' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100"> % black shoppers who shoplift
+<input type='text' name='w_shoplifters' id='w_shoplifters' value='10' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100"> % white shoppers who shoplift</p>
 
-<p>% black shoplifters who get caught
+<p>
+<input type='text' name='b_caught' id='b_caught' value='90' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
+% black shoplifters who get caught
+<input type='text' name='w_caught' id='w_caught' value='600' onchange='catch_shoplifters()' data-slider="true" data-slider-step="0.01" data-slider-range="0, 100">
 % white shoplifters who get caught</p>
 
-<p>racial makeup of shoplifters who are caught
+<p><span id ="caught_bw_ratio"> 14.3 </span> % of the shoplifters who are caught are black
+</p>
+<p>
+<span id ="shoplifters_bw_ratio"> 10</span> % of the shoplifters who are black
 (include graph)</p>
 
 <p>(show graph comparing with what the racial makeup should be without racial profiling)</p>
@@ -58,13 +61,14 @@
 <h2>
 <a name="interaction-with-confirmation-bias" class="anchor" href="#interaction-with-confirmation-bias"><span class="octicon octicon-link"></span></a>Interaction With Confirmation Bias</h2>
 
-<h3>
-<a name="this-is-a-separate-effect-from-confirmation-bias-which-is-where-you-are-more-likely-to-notice-facts-that-are-consistent-with-your-world-view--this-result-shows-that-even-without-confirmation-bias-which-we-all-have-we-are-likely-to-believe-things-that-arent-true-simply-because-we-are-also-bad-at-reasoning-about-probability" class="anchor" href="#this-is-a-separate-effect-from-confirmation-bias-which-is-where-you-are-more-likely-to-notice-facts-that-are-consistent-with-your-world-view--this-result-shows-that-even-without-confirmation-bias-which-we-all-have-we-are-likely-to-believe-things-that-arent-true-simply-because-we-are-also-bad-at-reasoning-about-probability"><span class="octicon octicon-link"></span></a>This is a separate effect from confirmation bias, which is where you are more likely to notice "facts" that are consistent with your world view.  This result shows that even without confirmation bias, which we all have, we are likely to believe things that aren't true simply because we are <strong>also</strong> bad at reasoning about probability.</h3>
+<p>
+This is a separate effect from confirmation bias, which is where you are more likely to notice "facts" that are consistent with your world view.  This result shows that even without confirmation bias, which we all have, we are likely to believe things that aren't true simply because we are <strong>also</strong> bad at reasoning about probability.</p>
 
-<ul>
-<li>I'm going to show that it doesn't really matter whether it is true or not true.  If it's not true, racial profiling will make it seem true.  If it is true, racial profiling will make it seem even more true.</li>
-</ul>
       </section>
+<section class = "inner">
+<p>
+* I'm going to show that it doesn't really matter whether it is true or not true.  If it's not true, racial profiling will make it seem true.  If it is true, racial profiling will make it seem even more true.</p>
+</section>
     </div>
 
     <!-- FOOTER  -->
@@ -78,4 +82,32 @@
     
 
   </body>
+
+ <script type='text/javascript'>
+    $("[data-slider]")
+    .each(function () {
+      var input = $(this);
+      $("<span>")
+        .addClass("output")
+        .insertAfter($(this));
+    })
+    .bind("slider:ready slider:changed", function (event, data) {
+      $(this)
+        .nextAll(".output:first")
+          .html(data.value.toFixed(1));
+    });
+    function catch_shoplifters() {
+      var b_shoppers = document.getElementById('b_shoppers').value;
+      var b_shoplifters = document.getElementById('b_shoplifters').value;
+      var w_shoplifters = document.getElementById('w_shoplifters').value;
+      var b_caught = document.getElementById('b_caught').value;
+      var w_caught = document.getElementById('w_caught').value;
+
+      caught_bw_ratio = b_caught*b_shoplifters*b_shoppers/(b_caught*b_shoplifters*b_shoppers+w_caught*w_shoplifters*(1-b_shoppers));
+      document.getElementById('caught_bw_ratio').innerHTML = caught_bw_ratio.toFixed(1);
+     shoplifters_bw_ratio = b_shoplifters*b_shoppers/(b_shoplifters*b_shoppers+w_shoplifters*(1-b_shoppers));
+      document.getElementById('shoplifters_bw_ratio').innerHTML = shoplifters_bw_ratio.toFixed(1);
+    }
+    
+  </script>
 </html>
