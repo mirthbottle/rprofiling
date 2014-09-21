@@ -10,7 +10,20 @@
     <link href="stylesheets/simple-slider.css" rel="stylesheet" type="text/css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="javascripts/simple-slider.js" type="text/javascript"></script>
+
     <title>Rprofiling</title>
+<style>
+
+.chart div {
+  padding: 1px;
+  margin: 0px;
+  color: white;
+  height: 100px;
+  float:left;
+}
+
+</style>
+
   </head>
 
   <body>
@@ -37,8 +50,14 @@ It's no secret that African Americans are over-represented in the criminal justi
 <h4>
 Yes, this is a controversial subject, but it's a simple example to demonstrate the relationship between racial profiling and stereotypes.</h4>
 
-<p>(to be included, graph with things shaded to show these percentages)
-<input type='text' name='b_shoppers' id='b_shoppers' value='0.1' onchange='catch_shoplifters()' data-slider="true" data-slider-step="0.01" data-slider-range="0, 1"> % black shoppers
+<div id="shoppers_reality" class="chart" style="overflow:hidden;">
+<div id="b_shoplifters_bar" style="width:5px;background-color: steelblue;"></div>
+<div id="b_ishoppers_bar" style="width:45px;background-color: blue;"></div>
+<div id="w_shoplifters_bar" style="width:45px;background-color: green"></div>
+<div id="w_ishoppers_bar" style="width:405px;background-color: limegreen"></div>
+</div>
+<p>
+<input type='text' name='b_shoppers' id='b_shoppers' value='10' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100"> % black shoppers
 
 <p>
 <input type='text' name='b_shoplifters' id='b_shoplifters' value='10' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100"> % black shoppers who shoplift
@@ -47,13 +66,13 @@ Yes, this is a controversial subject, but it's a simple example to demonstrate t
 <p>
 <input type='text' name='b_caught' id='b_caught' value='90' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
 % black shoplifters who get caught
-<input type='text' name='w_caught' id='w_caught' value='600' onchange='catch_shoplifters()' data-slider="true" data-slider-step="0.01" data-slider-range="0, 100">
+<input type='text' name='w_caught' id='w_caught' value='60' onchange='catch_shoplifters()' data-slider="true" data-slider-step="0.01" data-slider-range="0, 100">
 % white shoplifters who get caught</p>
 
-<p><span id ="caught_bw_ratio"> 14.3 </span> % of the shoplifters who are caught are black
+<p><span id ="caught_bw_ratio"><strong> 14.3 </strong> </span> % of the shoplifters who are caught are black
 </p>
 <p>
-<span id ="shoplifters_bw_ratio"> 10</span> % of the shoplifters who are black
+<span id ="shoplifters_bw_ratio"><strong> 10</strong></span> % of the shoplifters who are black
 (include graph)</p>
 
 <p>(show graph comparing with what the racial makeup should be without racial profiling)</p>
@@ -82,7 +101,7 @@ This is a separate effect from confirmation bias, which is where you are more li
     
 
   </body>
-
+ 
  <script type='text/javascript'>
     $("[data-slider]")
     .each(function () {
@@ -103,11 +122,16 @@ This is a separate effect from confirmation bias, which is where you are more li
       var b_caught = document.getElementById('b_caught').value;
       var w_caught = document.getElementById('w_caught').value;
 
-      caught_bw_ratio = b_caught*b_shoplifters*b_shoppers/(b_caught*b_shoplifters*b_shoppers+w_caught*w_shoplifters*(1-b_shoppers));
+      caught_bw_ratio = 100*b_caught*b_shoplifters*b_shoppers/(b_caught*b_shoplifters*b_shoppers+w_caught*w_shoplifters*(100-b_shoppers));
       document.getElementById('caught_bw_ratio').innerHTML = caught_bw_ratio.toFixed(1);
-     shoplifters_bw_ratio = b_shoplifters*b_shoppers/(b_shoplifters*b_shoppers+w_shoplifters*(1-b_shoppers));
+     shoplifters_bw_ratio = 100*b_shoplifters*b_shoppers/(b_shoplifters*b_shoppers+w_shoplifters*(100-b_shoppers));
       document.getElementById('shoplifters_bw_ratio').innerHTML = shoplifters_bw_ratio.toFixed(1);
     }
     
-  </script>
+    function display_shoppers(){
+     //data = [1, 9, 9, 81]
+     document.getElementById('b_shoplifters_bar').style="width:15px;background-color: steelblue;";
+     }
+     display_shoppers();
+ </script>
 </html>
