@@ -15,11 +15,21 @@
 <style>
 
 .chart div {
-  padding: 1px;
+  padding: 0px;
   margin: 0px;
-  color: white;
   height: 100px;
+  color: white;
   float:left;
+  font-size: 10px;
+  text-align: center;
+}
+
+.vertical-text {
+  # display:block; 
+  # -webkit-transform: rotate(90deg); 
+  # -moz-transform: rotate(90deg);	
+  # transform: rotate(90deg);
+  # float: left;
 }
 
 </style>
@@ -31,7 +41,7 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="https://github.com/mirthbottle/rprofiling">View on GitHub</a>
+          <a id="forkme_banner" style="background-color:salmon;" href="https://github.com/mirthbottle/rprofiling">View on GitHub</a>
 
           <h1 id="project_title">Racial Profiling</h1>
           <h2 id="project_tagline">reasoning about racial profiling</h2>
@@ -51,42 +61,50 @@ It's no secret that African Americans are over-represented in the criminal justi
 Yes, this is a controversial subject, but it's a simple example to demonstrate the relationship between racial profiling and stereotypes.</h4>
 
 <div id="shoppers_reality" class="chart" style="overflow:hidden;">
-<div id="b_ishoppers_bar" style="width:45px;background-color: orange;"></div>
-<div id="b_shoplifters_bar" style="width:5px;background-color: orangered;"></div>
-<div id="w_shoplifters_bar" style="width:45px;background-color: olivedrab"></div>
-<div id="w_ishoppers_bar" style="width:405px;background-color: yellowgreen"></div>
+<div id="b_ishoppers_bar" style="width:47px;background-color: orange;">
+black shoppers</div>
+<div id="b_shoplifters_bar" style="width:3px;background-color: orangered;">
+black shop lifters</div>
+<div id="w_shoplifters_bar" style="width:23px;background-color: olivedrab">
+white shop lifters</div>
+<div id="w_ishoppers_bar" style="width:427px;background-color: yellowgreen">
+white shoppers</div>
 </div>
 <p>
 <input type='text' name='b_shoppers' id='b_shoppers' value='10' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100"> % black shoppers
 
 <p>
-<input type='text' name='b_shoplifters' id='b_shoplifters' value='10' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100"> % black shoppers who shoplift
-<input type='text' name='w_shoplifters' id='w_shoplifters' value='10' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100"> % white shoppers who shoplift</p>
+<input type='text' name='b_shoplifters' id='b_shoplifters' value='5' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% black shoppers shoplift
+<input type='text' name='w_shoplifters' id='w_shoplifters' value='5' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% white shoppers shoplift</p>
 
 <div id="shoppers_caught" class="chart" style="overflow:hidden;">
-<div id="b_innocent" style="width:45px;background-color: orange;"></div>
-<div id="b_got_away" style="width:1px;background-color: gold;"></div>
-<div id="b_caught_bar" style="width:4px;background-color: orangered;"></div>
-<div id="w_caught_bar" style="width:27px;background-color: olivedrab"></div>
-<div id="w_got_away" style="width:18px;background-color: greenyellow"></div>
-<div id="w_innocent" style="width:405px;background-color: yellowgreen"></div>
+<div id="b_innocent" style="width:47px;background-color: orange;">black shoppers</div>
+<div id="b_got_away" style="width:0px;background-color: orangered;">not caught</div>
+<div id="b_caught_bar" style="width:3px;background-color: red;">caught</div>
+<div id="w_caught_bar" style="width:14px;background-color: darkolivegreen">caught</div>
+<div id="w_got_away" style="width:9px;background-color: olivedrab">not caught</div>
+<div id="w_innocent" style="width:427px;background-color: yellowgreen">white shoppers</div>
 </div>
 <p>
 <input type='text' name='b_caught' id='b_caught' value='90' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
-% black shoplifters who get caught
+% black shoplifters get caught
 <input type='text' name='w_caught' id='w_caught' value='60' onchange='catch_shoplifters()' data-slider="true" data-slider-step="0.01" data-slider-range="0, 100">
-% white shoplifters who get caught</p>
+% white shoplifters get caught</p>
 
-<p><span id ="caught_bw_ratio"><strong> 14.3 </strong> </span> % of the shoplifters who are caught are black
-</p>
-<p>
-<span id ="shoplifters_bw_ratio"><strong> 10</strong></span> % of the shoplifters who are black
-(include graph)</p>
-
-<p>(show graph comparing with what the racial makeup should be without racial profiling)</p>
-
+<div id="caught_races" class="chart" style="overflow:hidden;">
+<div id="b_caught_races" style="width:72px;background-color: red;"></div>
+<div id="w_caught_races" style="font-size:20px;width:428px;background-color: darkolivegreen"><span id ="caught_bw_ratio"><strong> 14.3</strong></span>% of caught shoplifters are black</div>
+</div>
+<div id="guilty_races" class="chart" style="overflow:hidden;">
+<div id="b_guilty" style="width:50px;background-color: orangered;"></div>
+<div id="w_guilty" style="font-size:20px;width:450px;background-color: olivedrab"><span id ="shoplifters_bw_ratio"><strong> 10</strong></span>% of shoplifters are black</div>
+</div>
+<h3>
+<span id ="caught_error"><strong> 43</strong></span>% overrepresentation of African Americans among caught shoplifters
+</h3>
+<br><br><br>
 <h2>
-<a name="interaction-with-confirmation-bias" class="anchor" href="#interaction-with-confirmation-bias"><span class="octicon octicon-link"></span></a>Interaction With Confirmation Bias</h2>
+Interaction With Confirmation Bias</h2>
 
 <p>
 This is a separate effect from confirmation bias, which is where you are more likely to notice "facts" that are consistent with your world view.  This result shows that even without confirmation bias, which we all have, we are likely to believe things that aren't true simply because we are <strong>also</strong> bad at reasoning about probability.</p>
@@ -139,14 +157,19 @@ This is a separate effect from confirmation bias, which is where you are more li
       var w_c = w_s*w_caught/100.0;
       var w_ga = w_s - w_c;
 
-      display_shoppers(b_i, b_s, w_i,w_s, b_c, b_ga, w_c, w_ga);
-      caught_bw_ratio = 100.0 * b_c/(b_c + w_c);
-      document.getElementById('caught_bw_ratio').innerHTML = caught_bw_ratio.toFixed(1);
-     shoplifters_bw_ratio = 100.0 * b_s/(b_s + w_s);
-      document.getElementById('shoplifters_bw_ratio').innerHTML = shoplifters_bw_ratio.toFixed(1);
+      caught_bw = 100.0 * b_c/(b_c + w_c);
+      document.getElementById('caught_bw_ratio').innerHTML = caught_bw.toFixed(1);
+     shoplifters_bw = 100.0 * b_s/(b_s + w_s);
+      document.getElementById('shoplifters_bw_ratio').innerHTML = shoplifters_bw.toFixed(1);
+
+     caught_error = (caught_bw/shoplifters_bw - 1)*100;
+      document.getElementById('caught_error').innerHTML = caught_error.toFixed(1);
+     display_shoppers(b_i, b_s, w_i,w_s, b_c, b_ga, w_c, w_ga, caught_bw, shoplifters_bw);
     }
     
-    function display_shoppers(b_i, b_s, w_i, w_s, b_c, b_ga, w_c, w_ga){
+    function display_shoppers(b_i, b_s, w_i, w_s, b_c, b_ga, w_c, w_ga, c_r, g_r){
+     // c_r = caught ratio
+     // g_r = guilty ratio
       var scale = 5;
       document.getElementById('b_ishoppers_bar').style.cssText="width:" + b_i*scale + "px;background-color: orange;";
       document.getElementById('b_shoplifters_bar').style.cssText="width:" + b_s*scale + "px;background-color: orangered;";
@@ -155,11 +178,16 @@ This is a separate effect from confirmation bias, which is where you are more li
 
 
       document.getElementById('b_innocent').style.cssText="width:" + b_i*scale + "px;background-color: orange;";
-      document.getElementById('b_got_away').style.cssText="width:" + b_ga*scale + "px;background-color: gold;";
-      document.getElementById('b_caught_bar').style.cssText="width:" + b_c*scale + "px;background-color: orangered;";
+      document.getElementById('b_got_away').style.cssText="width:" + b_ga*scale + "px;background-color: orangered;";
+      document.getElementById('b_caught_bar').style.cssText="width:" + b_c*scale + "px;background-color: red;";
       document.getElementById('w_innocent').style.cssText="width:" + w_i*scale + "px;background-color: yellowgreen;";
-      document.getElementById('w_got_away').style.cssText="width:" + w_ga*scale + "px;background-color: greenyellow;";
-      document.getElementById('w_caught_bar').style.cssText="width:" + w_c*scale + "px;background-color: olivedrab;";
+      document.getElementById('w_got_away').style.cssText="width:" + w_ga*scale + "px;background-color: olivedrab;";
+      document.getElementById('w_caught_bar').style.cssText="width:" + w_c*scale + "px;background-color: darkolivegreen;";
+
+     document.getElementById('b_caught_races').style.cssText="width:" + c_r*scale + "px;background-color: red;";
+     document.getElementById('w_caught_races').style.cssText="font-size:20px;width:" + (100-c_r)*scale + "px;background-color: darkolivegreen;";
+     document.getElementById('b_guilty').style.cssText="width:" + g_r*scale + "px;background-color: orangered;";
+     document.getElementById('w_guilty').style.cssText="font-size:20px;width:" + (100-g_r)*scale + "px;background-color: olivedrab;";
      }
      
  </script>
