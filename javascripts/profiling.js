@@ -1,4 +1,4 @@
-function catch_shoplifters() {
+function conduct_search() {
   var b_shoppers = document.getElementById('b_shoppers').value;
   var b_shoplifters = document.getElementById('b_shoplifters').value;
   var w_shoplifters = document.getElementById('w_shoplifters').value;
@@ -24,7 +24,7 @@ function catch_shoplifters() {
   display_shoppers(b_i, b_s, w_i,w_s, b_c, b_ga, w_c, w_ga, caught_bw, shoplifters_bw);
 }
 
-function display_shoppers(b_i, b_s, w_i, w_s, b_c, b_ga, w_c, w_ga, c_r, g_r){
+function display_search_results(b_i, b_s, w_i, w_s, b_c, b_ga, w_c, w_ga, c_r, g_r){
   // c_r = caught ratio
   // g_r = guilty ratio
   var scale = 5;

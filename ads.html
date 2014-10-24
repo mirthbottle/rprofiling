@@ -12,19 +12,19 @@
     <script src="javascripts/simple-slider.js" type="text/javascript"></script>
 
     <title>Targeted Advertising</title>
-<style>
+    <style>
 
-.chart div {
-  padding: 0px;
-  margin: 0px;
-  height: 80px;
-  color: white;
-  float:left;
-  font-size: 10px;
-  text-align: center;
-  padding-top: 20px;
-}
-</style>
+      .chart div {
+      padding: 0px;
+      margin: 0px;
+      height: 80px;
+      color: white;
+      float:left;
+      font-size: 10px;
+      text-align: center;
+      padding-top: 20px;
+      }
+    </style>
 
   </head>
 
@@ -32,77 +32,80 @@
 
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" style="background-color:salmon;" href="https://github.com/mirthbottle/rprofiling">View on GitHub</a>
+      <header class="inner">
+        <a id="forkme_banner" style="background-color:salmon;" href="https://github.com/mirthbottle/rprofiling">View on GitHub</a>
 
-          <h1 id="project_title">Targeted Advertising</h1>
-          <h2 id="project_tagline">Explain it to me as if I liked math</h2>
-        </header>
+        <h1 id="project_title">Targeted Advertising</h1>
+        <h2 id="project_tagline">Explain it to me as if I liked math</h2>
+      </header>
     </div>
 
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <p>
-Targeted advertising is an efficient way to reach customers.  However, it can be unfair.  This is an attempt to demonstrate that the market system may be an efficient way to provide services for the majority, but that it is efficient to ignore the preferences of the minority.</p>
+	  Targeted advertising is an efficient way to reach customers.  It can be unfair at the same time.  For example, <a href="http://www.nyinterconnect.com/comedy-central/">Comedy Central</a> appeals to more men than women.  I will show that it is in fact more efficient for them to target web advertising to men even if there is large number of women who also would enjoy it.  For the predictable person, targeted advertising is great because the products and services you like find you.  For the unpredictable or marginal person, this means that you are the one that has to put in time or money to look for things you want.</p>
+	<h1>example with targeted advertising</h1>
 
-<h1>example with shoplifting</h1>
+	<div id="reality" class="chart" style="overflow:hidden;">
+	  <div id="b_ishoppers_bar" style="width:150px;background-color: orange;">
+	    women</div>
+	  <div id="b_shoplifters_bar" style="width:100px;background-color: orangered;">
+	    women who would like comedy central</div>
+	  <div id="w_shoplifters_bar" style="width:175px;background-color: olivedrab">
+	    men who would like comedy central</div>
+	  <div id="w_ishoppers_bar" style="width:75px;background-color: yellowgreen">
+	    men</div>
+	</div>
+	<p>
+	  <input type='text' name='b_shoppers' id='b_shoppers' value='50' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100"> % women
+	<p>
+	  <input type='text' name='b_shoplifters' id='b_shoplifters' value='40' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% women would like comedy central
+	  <input type='text' name='w_shoplifters' id='w_shoplifters' value='70' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% men would like comedy central</p>
 
-<div id="shoppers_reality" class="chart" style="overflow:hidden;">
-<div id="b_ishoppers_bar" style="width:47px;background-color: orange;">
-black shoppers</div>
-<div id="b_shoplifters_bar" style="width:3px;background-color: orangered;">
-black shop lifters</div>
-<div id="w_shoplifters_bar" style="width:23px;background-color: olivedrab">
-white shop lifters</div>
-<div id="w_ishoppers_bar" style="width:427px;background-color: yellowgreen">
-white shoppers</div>
-</div>
-<p>
-<input type='text' name='b_shoppers' id='b_shoppers' value='10' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100"> % black shoppers
+	<h2> Advertising </h2>
+	<p>Without advertising 20% of people who would like it will watch it.  Advertising increases this 2x, but you have to advertise to the whole demographic.*  
+	  Assume the cost of advertising to men would be the same as advertising to women.  In the default case that 70% of men would like it compared to 40% of women, the conversion rate (person/ad) is <span id='conv_rate_diff'>75</span>% higher for men.  This means the cost ($/person) is <span id='cost_diff'>43</span>% less to advertise to men.</p>
+	<p>
 
-<p>
-<input type='text' name='b_shoplifters' id='b_shoplifters' value='5' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% black shoppers shoplift
-<input type='text' name='w_shoplifters' id='w_shoplifters' value='5' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% white shoppers shoplift</p>
+	<div id="shoppers_caught" class="chart" style="overflow:hidden;">
+	  <div id="b_innocent" style="width:150px;background-color: orange;">women</div>
+	  <div id="b_got_away" style="width:80px;background-color: orangered;">not watching</div>
+	  <div id="b_caught_bar" style="width:20px;background-color: red;">watching</div>
+	  <div id="w_caught_bar" style="width:70px;background-color: darkolivegreen">watching</div>
+	  <div id="w_got_away" style="width:105px;background-color: olivedrab">not watching</div>
+	  <div id="w_innocent" style="width:75px;background-color: yellowgreen">men</div>
+	</div>
 
-<div id="shoppers_caught" class="chart" style="overflow:hidden;">
-<div id="b_innocent" style="width:47px;background-color: orange;">black shoppers</div>
-<div id="b_got_away" style="width:0px;background-color: orangered;">not caught</div>
-<div id="b_caught_bar" style="width:3px;background-color: red;">caught</div>
-<div id="w_caught_bar" style="width:14px;background-color: darkolivegreen">caught</div>
-<div id="w_got_away" style="width:9px;background-color: olivedrab">not caught</div>
-<div id="w_innocent" style="width:427px;background-color: yellowgreen">white shoppers</div>
-</div>
-<p>
-<input type='text' name='b_caught' id='b_caught' value='90' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
-% black shoplifters get caught
-<input type='text' name='w_caught' id='w_caught' value='60' onchange='catch_shoplifters()' data-slider="true" data-slider-step="0.01" data-slider-range="0, 100">
-% white shoplifters get caught</p>
+	  <input type='text' name='b_caught' id='b_caught' value='20' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
+	  % women watch among those who would like it
+	  <input type='text' name='w_caught' id='w_caught' value='40' onchange='catch_shoplifters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
+	  % men watch among those who would like it</p>
 
-<div id="caught_races" class="chart" style="overflow:hidden;">
-<div id="b_caught_races" style="width:72px;background-color: red;"></div>
-<div id="w_caught_races" style="font-size:20px;width:428px;background-color: darkolivegreen"><span id ="caught_bw_ratio"><strong> 14.3</strong></span>% of caught shoplifters are black</div>
-</div>
-<div id="guilty_races" class="chart" style="overflow:hidden;">
-<div id="b_guilty" style="width:50px;background-color: orangered;"></div>
-<div id="w_guilty" style="font-size:20px;width:450px;background-color: olivedrab"><span id ="shoplifters_bw_ratio"><strong> 10</strong></span>% of shoplifters are black</div>
-</div>
-<h3>
-<span id ="caught_error"><strong> 43</strong></span>% overrepresentation of African Americans among caught shoplifters
-</h3>
-<br><br><br>
-<h2>
-Interaction With Confirmation Bias</h2>
-
-<p>
-This is a separate effect from confirmation bias, which is where you are more likely to notice "facts" that are consistent with your world view.  This result shows that even without confirmation bias, which we all have, we are likely to believe things that aren't true simply because we are <strong>also</strong> bad at reasoning about probability.</p>
+	<div id="caught_races" class="chart" style="overflow:hidden;">
+	  <div id="b_caught_races" style="width:111px;background-color: red;"></div>
+	  <div id="w_caught_races" style="font-size:20px;width:389px;background-color: darkolivegreen"><span id ="caught_bw_ratio"><strong> 11.3</strong></span>% of watchers are women</div>
+	</div>
+	<div id="guilty_races" class="chart" style="overflow:hidden;">
+	  <div id="b_guilty" style="width:182px;background-color: orangered;"></div>
+	  <div id="w_guilty" style="font-size:20px;width:318px;background-color: olivedrab"><span id ="shoplifters_bw_ratio"><strong> 36.4</strong></span>% of people who would like to watch are women</div>
+	</div>
+	<h3>
+	  <span id ="caught_error"><strong> -69</strong></span>% overrepresentation of women among people who watch comedy central
+	</h3>
+	<p>
+	  This isn't necessarily a "big deal" for the private sector.  Businesses don't need to care whether its customers are diverse.  They could just focus on acquiring a high percentage of the demographic that is most receptive to their product.  Also, many products for niche markets are now economically viable because of the reduced the costs for acquiring customers.
+	</p>
+	<p>
+	  In many cases, government services are there to meet the needs of people whose needs are not met by the private sector.  In many cases, their needs are not met because it is not economical for private actors to do so.  When making services available such as public transit, the government should not simply ignore groups of people just because they are difficult to serve.  The most straightforward examples are services for the handicapped.  The overall result is that it is more expensive in general when the government provides services compared to the private sector even without taking into account the inefficiencies from bureaucracy or corruption.
+	</p>
 
       </section>
-<section class = "inner">
-<p>
-* notes
-</p>
-</section>
+      <section class = "inner">
+	<p>
+	  * In this example, you can't do better than advertising per demographic.  With targeted advertising, you can narrow a person down by many other attributes such as zip code, age, what web sites they've visited recently, etc.  However, each attribute should be recognized for what they are, which are proxies.  There will always be people who are unpredictable and who will be missed.
+	</p>
+      </section>
     </div>
 
     <!-- FOOTER  -->
@@ -116,21 +119,21 @@ This is a separate effect from confirmation bias, which is where you are more li
     
 
   </body>
- 
- <script type='text/javascript'>
+  
+  <script type='text/javascript'>
     $("[data-slider]")
     .each(function () {
-      var input = $(this);
-      $("<span>")
-        .addClass("output")
-        .insertAfter($(this));
-    })
-    .bind("slider:ready slider:changed", function (event, data) {
+    var input = $(this);
+    $("<span>")
+      .addClass("output")
+      .insertAfter($(this));
+      })
+      .bind("slider:ready slider:changed", function (event, data) {
       $(this)
-        .nextAll(".output:first")
-          .html(data.value.toFixed(1));
-    });
-    function catch_shoplifters() {
+      .nextAll(".output:first")
+      .html(data.value.toFixed(1));
+      });
+      function catch_shoplifters() {
       var b_shoppers = document.getElementById('b_shoppers').value;
       var b_shoplifters = document.getElementById('b_shoplifters').value;
       var w_shoplifters = document.getElementById('w_shoplifters').value;
@@ -148,17 +151,17 @@ This is a separate effect from confirmation bias, which is where you are more li
 
       caught_bw = 100.0 * b_c/(b_c + w_c);
       document.getElementById('caught_bw_ratio').innerHTML = caught_bw.toFixed(1);
-     shoplifters_bw = 100.0 * b_s/(b_s + w_s);
+      shoplifters_bw = 100.0 * b_s/(b_s + w_s);
       document.getElementById('shoplifters_bw_ratio').innerHTML = shoplifters_bw.toFixed(1);
 
-     caught_error = (caught_bw/shoplifters_bw - 1)*100;
+      caught_error = (caught_bw/shoplifters_bw - 1)*100;
       document.getElementById('caught_error').innerHTML = caught_error.toFixed(1);
-     display_shoppers(b_i, b_s, w_i,w_s, b_c, b_ga, w_c, w_ga, caught_bw, shoplifters_bw);
-    }
-    
-    function display_shoppers(b_i, b_s, w_i, w_s, b_c, b_ga, w_c, w_ga, c_r, g_r){
-     // c_r = caught ratio
-     // g_r = guilty ratio
+      display_shoppers(b_i, b_s, w_i,w_s, b_c, b_ga, w_c, w_ga, caught_bw, shoplifters_bw);
+      }
+      
+      function display_shoppers(b_i, b_s, w_i, w_s, b_c, b_ga, w_c, w_ga, c_r, g_r){
+      // c_r = caught ratio
+      // g_r = guilty ratio
       var scale = 5;
       document.getElementById('b_ishoppers_bar').style.cssText="width:" + b_i*scale + "px;background-color: orange;";
       document.getElementById('b_shoplifters_bar').style.cssText="width:" + b_s*scale + "px;background-color: orangered;";
@@ -173,11 +176,11 @@ This is a separate effect from confirmation bias, which is where you are more li
       document.getElementById('w_got_away').style.cssText="width:" + w_ga*scale + "px;background-color: olivedrab;";
       document.getElementById('w_caught_bar').style.cssText="width:" + w_c*scale + "px;background-color: darkolivegreen;";
 
-     document.getElementById('b_caught_races').style.cssText="width:" + c_r*scale + "px;background-color: red;";
-     document.getElementById('w_caught_races').style.cssText="font-size:20px;width:" + (100-c_r)*scale + "px;background-color: darkolivegreen;";
-     document.getElementById('b_guilty').style.cssText="width:" + g_r*scale + "px;background-color: orangered;";
-     document.getElementById('w_guilty').style.cssText="font-size:20px;width:" + (100-g_r)*scale + "px;background-color: olivedrab;";
-     }
-     
- </script>
+      document.getElementById('b_caught_races').style.cssText="width:" + c_r*scale + "px;background-color: red;";
+      document.getElementById('w_caught_races').style.cssText="font-size:20px;width:" + (100-c_r)*scale + "px;background-color: darkolivegreen;";
+      document.getElementById('b_guilty').style.cssText="width:" + g_r*scale + "px;background-color: orangered;";
+      document.getElementById('w_guilty').style.cssText="font-size:20px;width:" + (100-g_r)*scale + "px;background-color: olivedrab;";
+      }
+      
+  </script>
 </html>
