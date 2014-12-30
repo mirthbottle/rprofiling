@@ -56,36 +56,37 @@
 	  It's no secret that African Americans are over-represented in the criminal justice system.  Based on this fact, it is widely believed that black people simply commit more crimes than white people*.  On its face, racial profiling seems like an efficient way to catch criminals.  However, to rephrase the obvious, racial profiling means that you will catch a <strong>higher percentage</strong> of the black criminals, causing them to be overly represented among the criminals that you catch.  This is an attempt to demonstrate that the results tend to <strong>reinforce prejudices</strong> (because human beings are not good at reasoning about probability and cause).**</p>
 
 	<h1>example with shoplifting</h1>
-
+	
 	<h4>
 	  Yes, this is a controversial subject, but it's a simple example to demonstrate the relationship between racial profiling and stereotypes.</h4>
-
-	<div id='filter0'></div>
+	
+	<div id='reality'></div>
 	<p>
 	  <input type='text' name='pa' id='pa' value='10' onchange='apply_filters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100"> % black shoppers
 	  
 	<p>
 	  <input type='text' name='p1_a' id='p1_a' value='5' onchange='apply_filters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% black shoppers shoplift
 	  <input type='text' name='p1_b' id='p1_b' value='5' onchange='apply_filters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% white shoppers shoplift</p>
-
-	<div id='filter1'></div>
-	<p>
-	  <input type='text' name='pf1_a1' id='pf1_a1' value='90' onchange='apply_filters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
-	  % black shoplifters get caught
-	  <input type='text' name='pf1_b1' id='pf1_b1' value='60' onchange='apply_filters()' data-slider="true" data-slider-step="0.01" data-slider-range="0, 100">
-	  % white shoplifters get caught</p>
 	
-	<div id='filter1_groupa'></div>
-	<span id ="pa_1f1"><strong> 14.3</strong></span>% of caught shoplifters are black
-	<div id='filter0_groupa'></div><span id ="pa_1"><strong> 10</strong></span>% of shoplifters are black
-	</div>
+	<div id='profiled'></div>
+	<p>
+	  <input type='text' name='pr_a' id='pr_a' value='90' onchange='apply_filters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
+	  % black shoplifters profiled
+	  <input type='text' name='pr_b' id='pr_b' value='60' onchange='apply_filters()' data-slider="true" data-slider-step="0.01" data-slider-range="0, 100">
+	  % white shoplifters profiled</p>
+	
+	<div id='groupa_profiled'></div>
+	<span id ="pa_1r"><strong> 14.3</strong></span>% of caught shoplifters are black
+	<div id='groupa'></div><span id ="pa_1"><strong> 10</strong></span>% of shoplifters are black
 	<h3>
-	  <span id ="ea_1f1"><strong> 43</strong></span>% overrepresentation of African Americans among caught shoplifters
+	  <span id ="e"><strong>50</strong></span> shoplifters caught out of people profiled
+	</h3>
+	<h3>
+	  <span id ="ua_1r"><strong> 43</strong></span>% overrepresentation of African Americans among caught shoplifters
 	</h3>
 	<br><br><br>
-	<h2>
-	  Interaction With Confirmation Bias</h2>
-
+	<h2>Interaction With Confirmation Bias</h2>
+	
 	<p>
 	  This is a separate effect from confirmation bias, which is where you are more likely to notice "facts" that are consistent with your world view.  This result shows that even without confirmation bias, which we all have, we are likely to believe things that aren't true simply because we are <strong>also</strong> bad at reasoning about probability.</p>
 	
@@ -102,28 +103,28 @@
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
-        <p class="copyright">Copyright &copy 2014 <a href="https://github.com/mirthbottle">mirthbottle</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+	<p class="copyright">Copyright &copy 2014 <a href="https://github.com/mirthbottle">mirthbottle</a></p>
+	<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-
     
 
+
   </body>
- 
- <script type='text/javascript'>
+  
+  <script type='text/javascript'>
     $("[data-slider]")
     .each(function () {
-      var input = $(this);
-      $("<span>")
-        .addClass("output")
-        .insertAfter($(this));
-    })
-    .bind("slider:ready slider:changed", function (event, data) {
+    var input = $(this);
+    $("<span>")
+      .addClass("output")
+      .insertAfter($(this));
+      })
+      .bind("slider:ready slider:changed", function (event, data) {
       $(this)
-        .nextAll(".output:first")
-          .html(data.value.toFixed(1));
-    });
-   
- </script>
+      .nextAll(".output:first")
+      .html(data.value.toFixed(1));
+      });
+      
+  </script>
 </html>
