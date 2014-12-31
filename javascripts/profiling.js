@@ -146,7 +146,10 @@ function initialize_bar(chart_name, data){
       rotated: true,
       x: { show: false },
       y: { show: false }
-    }
+    },
+    legend: { show: false },
+    tooltip: {
+      format: {	title: function (x) { return '';}}}
   });
   return chart;
 }
