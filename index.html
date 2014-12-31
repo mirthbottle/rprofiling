@@ -62,27 +62,25 @@
 	
 	<div id='reality'></div>
 	<p>
-	  <input type='text' name='pa' id='pa' value='10' onchange='apply_filters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100"> % black shoppers
+	  <input type='text' name='pa' id='pa' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100"> % black shoppers
 	  
 	<p>
-	  <input type='text' name='p1_a' id='p1_a' value='5' onchange='apply_filters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% black shoppers shoplift
-	  <input type='text' name='p1_b' id='p1_b' value='5' onchange='apply_filters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% white shoppers shoplift</p>
+	  <input type='text' name='p1_a' id='p1_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% black shoppers shoplift
+	  <input type='text' name='p1_b' id='p1_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% white shoppers shoplift</p>
 	
 	<div id='profiled'></div>
 	<p>
-	  <input type='text' name='pr_a' id='pr_a' value='90' onchange='apply_filters()' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
+	  <input type='text' name='pr_a' id='pr_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
 	  % black shoplifters profiled
-	  <input type='text' name='pr_b' id='pr_b' value='60' onchange='apply_filters()' data-slider="true" data-slider-step="0.01" data-slider-range="0, 100">
+	  <input type='text' name='pr_b' id='pr_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="0.01" data-slider-range="0, 100">
 	  % white shoplifters profiled</p>
 	
-	<div id='groupa_profiled'></div>
-	<span id ="pa_1r"><strong> 14.3</strong></span>% of caught shoplifters are black
-	<div id='groupa'></div><span id ="pa_1"><strong> 10</strong></span>% of shoplifters are black
+	<div id='groupa'></div>
 	<h3>
-	  <span id ="e"><strong>50</strong></span> shoplifters caught out of people profiled
+	  <span id ="e"><strong> </strong></span> shoplifters caught out of people profiled
 	</h3>
 	<h3>
-	  <span id ="ua_1r"><strong> 43</strong></span>% overrepresentation of African Americans among caught shoplifters
+	  <span id ="u"><strong> </strong></span>% overrepresentation of African Americans among caught shoplifters
 	</h3>
 	<br><br><br>
 	<h2>Interaction With Confirmation Bias</h2>
@@ -113,6 +111,9 @@
   </body>
   
   <script type='text/javascript'>
+    
+    var bars =  initialize_presentation();
+
     $("[data-slider]")
     .each(function () {
     var input = $(this);
@@ -125,6 +126,5 @@
       .nextAll(".output:first")
       .html(data.value.toFixed(1));
       });
-      
   </script>
 </html>
