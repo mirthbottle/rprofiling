@@ -17,15 +17,15 @@ function initialize_presentation(){
   document.getElementById('pa').value = pa.toFixed(1);
   // p(1|x) = % of group x that is group 1
   var p1_a = 5;
-  document.getElementById('p1_a').innerHTML = p1_a.toFixed(1);
+  document.getElementById('p1_a').value = p1_a.toFixed(1);
   var p1_b = 5;
-  document.getElementById('p1_b').innerHTML = p1_b.toFixed(1);
+  document.getElementById('p1_b').value = p1_b.toFixed(1);
   
   // p(r|x) = % of group x that is profiled
   var pr_a = 90;
-  document.getElementById('pr_a').innerHTML = pr_a.toFixed(1);
+  document.getElementById('pr_a').value = pr_a.toFixed(1);
   var pr_b = 60;
-  document.getElementById('pr_b').innerHTML = pr_b.toFixed(1);
+  document.getElementById('pr_b').value = pr_b.toFixed(1);
   
   var updated_data = compute_presentation_data(pa, p1_a, p1_b, pr_a, pr_b);
   
@@ -40,8 +40,8 @@ function initialize_presentation(){
   // groupa bar
   bars['groupa'] = initialize_bar('#groupa', updated_data['groupa']);
 
-  // document.getElementById('e').innerHTML = e.toFixed(1);
-  // document.getElementById('ua_1r').innerHTML = ua_1r.toFixed(1);
+  document.getElementById('e').innerHTML = updated_data['e'].toFixed(3);
+  document.getElementById('u').innerHTML = updated_data['u'].toFixed(1);
 
   return bars;
 }
@@ -74,7 +74,7 @@ function compute_reality(pa, p1_a, p1_b){
   // % of total that is subgroup b1
   var pb1 = p1_b/100.0*(100-pa);
   var pb2 = 100 - pa - pb1;
-  return [pa2, pa1, pb1, pb2];
+  return [+pa2.toFixed(1), +pa1.toFixed(1), +pb1.toFixed(1), +pb2.toFixed(1)];
 }
 
 function compute_profiled(pa, p1_a, p1_b, pr_a, pr_b, reality_values){
@@ -96,7 +96,7 @@ function compute_profiled(pa, p1_a, p1_b, pr_a, pr_b, reality_values){
   var pb2r = pb2*pr_b/100.0;
   var pb2o = pb2 - pb2r;
 
-  return [pa2o, pa2r, pa1r, pa1o, pb1o, pb1r, pb2r, pb2o];
+  return [+pa2o.toFixed(1), +pa2r.toFixed(1), +pa1r.toFixed(1), +pa1o.toFixed(1), +pb1o.toFixed(1), +pb1r.toFixed(1), +pb2r.toFixed(1), +pb2o.toFixed(1)];
 }
 
 function compute_groupa(reality_values, profiled_values){
@@ -111,15 +111,15 @@ function compute_groupa(reality_values, profiled_values){
   // % of group 1 that are group a
   var pa_1 = 100.0 * pa1/(pa1 + pb1);
   var pb_1 = 100.0 - pa_1;
-  return [pa_1, pb_1, pa_1r, pb_1r];
+  return [+pa_1.toFixed(1), +pb_1.toFixed(1), +pa_1r.toFixed(1), +pb_1r.toFixed(1)];
 }
 
 function compute_efficiency(pa, pr_a, pr_b, profiled_values){
   var pa1r = profiled_values[2];
   var pb1r = profiled_values[5];
   // overall efficiency of profiler = % of x profiled that are group 1
-  var e = 100.0 * (pa1r + pb1r)/(pa*pr_a + (1-pa)*pr_b);
-  return e;
+  var e = 100.0 * (pa1r + pb1r)/(pa*pr_a + (100.0-pa)*pr_b);
+  return +e.toFixed(1);
 }
 
 function compute_unfairness(groupa_values){
@@ -127,8 +127,8 @@ function compute_unfairness(groupa_values){
   var pa_1r = groupa_values[2];
   // unfairness
   // % overrepresentation of group a among those profiled 
-  var u = (pa_1r/pa_1 - 1)*100;
-  return u;
+  var u = (pa_1r/pa_1 - 1.0)*100.0;
+  return +u.toFixed(1);
  
 }
 
@@ -167,6 +167,7 @@ function update_presentation(bars) {
   var updated_data = compute_presentation_data(pa, p1_a, p1_b, pr_a, pr_b);
 
   update_bars(bars, updated_data);
+  update_text(updated_data);
 }
 
 function update_bars(bars, updated_data){
@@ -188,6 +189,6 @@ function update_bars(bars, updated_data){
 
 
 function update_text(updated_data){
-  // document.getElementById('e').innerHTML = e.toFixed(1);
-  // document.getElementById('ua_1r').innerHTML = ua_1r.toFixed(1);
+  document.getElementById('e').innerHTML = updated_data['e'].toFixed(3);
+  document.getElementById('u').innerHTML = updated_data['u'].toFixed(1);
 }

@@ -71,16 +71,16 @@
 	<div id='profiled'></div>
 	<p>
 	  <input type='text' name='pr_a' id='pr_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
-	  % black shoplifters profiled
+	  % black shoppers suspected of shoplifting
 	  <input type='text' name='pr_b' id='pr_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="0.01" data-slider-range="0, 100">
-	  % white shoplifters profiled</p>
+	  % white shoppers suspected of shoplifting</p>
 	
 	<div id='groupa'></div>
 	<h3>
-	  <span id ="e"><strong> </strong></span> shoplifters caught out of people profiled
+	  Efficiency: <span id ="e"><strong> </strong></span> shoplifters caught per person profiled
 	</h3>
 	<h3>
-	  <span id ="u"><strong> </strong></span>% overrepresentation of African Americans among caught shoplifters
+	  Unfairness: <span id ="u"><strong> </strong></span>% overrepresentation of African Americans among caught shoplifters
 	</h3>
 	<br><br><br>
 	<h2>Interaction With Confirmation Bias</h2>
@@ -111,7 +111,22 @@
   </body>
   
   <script type='text/javascript'>
+    function reality_names(){
+    return ['black shoppers', 'black shoplifters', 
+            'white shoplifters', 'white shoppers'];
+    }
     
+    function profiled_names(){
+    return ['black shoppers', 'black shoppers suspected',
+            'black shoplifters caught', 'black shoplifters uncaught',
+            'white shoplifters uncaught', 'white shoplifters caught',
+            'white shoppers suspected', 'white shoppers'];
+    }
+    
+    function groupa_names(){
+    return ['black shoplifters', 'white shoplifters', 
+            'black shoplifters caught', 'white shoplifters caught'];
+    }
     var bars =  initialize_presentation();
 
     $("[data-slider]")
