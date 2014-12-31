@@ -10,6 +10,26 @@ function groupa_names(){
   return ['pa_1', 'pb_1', 'pa_1r', 'pb_1r'];
 }
 
+function presentation_colors(){
+  var colors = {'pa2':"#ffa900",
+		'pa2o':"#ffa900",
+                'pa2r':"#aa9900",
+                'pa1r':"#607100",
+		'pa_1r':"#607100",
+		'pa1':"#607100",
+		'pa_1':"#607100",
+                'pa1o':"#999900",
+                'pb2':"#6272bb",
+		'pb2o':"#6272bb",
+                'pb2r':"#e146ba",
+                'pb1r':"#c51b7d",
+		'pb_1r':"#c51b7d",
+		'pb1':"#c51b7d",
+		'pb_1':"#c51b7d",
+                'pb1o':"#20369e"
+	       }
+  return colors;
+}
 function initialize_presentation(){
   // populate default values of sliders and bars
   // % of population that is group a
@@ -140,7 +160,8 @@ function initialize_bar(chart_name, data){
 	     data[1]],
       type: 'bar',
       order: null,
-      groups: data[2]
+      groups: data[2],
+      colors: presentation_colors()
     },
     axis: {
       rotated: true,

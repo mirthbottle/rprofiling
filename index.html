@@ -127,6 +127,21 @@
     return ['black shoplifters', 'white shoplifters', 
             'black shoplifters caught', 'white shoplifters caught'];
     }
+
+    function presentation_colors(){
+    var colors = {'black shoppers':"#ffa900",
+                  'black shoppers suspected':"#aa9900",
+                  'black shoplifters caught':"#607100",
+                  'black shoplifters uncaught':"#ff7100",
+                  'black shoplifters':"#999900",
+                  'white shoppers':"#6272bb",
+                  'white shoppers suspected':"#e146ba",
+                  'white shoplifters caught':"#c51b7d",
+                  'white shoplifters uncaught':"#20369e",
+                  'white shoplifters':"#c51b7d"}
+    return colors;
+    }
+
     var bars =  initialize_presentation();
 
     $("[data-slider]")
