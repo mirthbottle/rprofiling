@@ -225,3 +225,4 @@ function update_text(updated_data){
   document.getElementById('efficiency').innerHTML = updated_data['efficiency'].toFixed(3);
   document.getElementById('u').innerHTML = updated_data['u'].toFixed(1);
 }
+

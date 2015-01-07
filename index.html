@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="description" content="Rprofiling : breaking down racial profiling">
 
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
     <link href="stylesheets/simple-slider.css" rel="stylesheet" type="text/css" />
 
@@ -14,6 +15,7 @@
     
     <!-- Load d3.js and c3.js -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="javascripts/simple-slider.js" type="text/javascript"></script>
     <script src="javascripts/d3.min.js" charset="utf-8"></script>
     <script src="javascripts/c3-0.4.8/c3.min.js"></script>
@@ -31,6 +33,12 @@
   font-size: 10px;
   text-align: center;
   padding-top: 20px;
+}
+
+button.btn-info{
+    position:relative;
+    top: 30px;
+    left: 630px;
 }
 
 </style>
@@ -60,22 +68,27 @@
 	<h4>
 	  Yes, this is a controversial subject, but it's a simple example to demonstrate the relationship between racial profiling and stereotypes.</h4>
 	
-	<div id='reality'></div>
+	<button id="reality_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#reality" onclick="toggle_collapse('#reality_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
+	<div id='reality' class="collapse in"></div>
 	<p>
 	  <input type='text' name='pa' id='pa' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100"> % black shoppers
 	  
 	<p>
 	  <input type='text' name='p1_a' id='p1_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% black shoppers shoplift
 	  <input type='text' name='p1_b' id='p1_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% white shoppers shoplift</p>
-	
-	<div id='profiled'></div>
-	<p>
-	  <input type='text' name='pr_a' id='pr_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
-	  % black shoppers suspected of shoplifting
-	  <input type='text' name='pr_b' id='pr_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="0.01" data-slider-range="0, 100">
-	  % white shoppers suspected of shoplifting</p>
-	
-	<div id='groupa'></div>
+
+	<button id="profiled_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#profiled" onclick="toggle_collapse('#profiled_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
+	<div id='profiled' class="collapse in"></div>
+	<div id='ptext'>
+	  <p>
+	    <input type='text' name='pr_a' id='pr_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
+	    % black shoppers suspected of shoplifting
+	    <input type='text' name='pr_b' id='pr_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="0.01" data-slider-range="0, 100">
+	    % white shoppers suspected of shoplifting</p>
+	</div>
+
+	<button id="groupa_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#groupa" onclick="toggle_collapse('#groupa_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
+	<div id='groupa' class="collapse in"></div>
 	<h3>
 	  Effort: <span id ="effort"><strong> </strong></span>% shoppers profiled.  This represents the level of surveillance on shoppers.
 	<h3>
@@ -113,6 +126,12 @@
   </body>
   
   <script type='text/javascript'>
+    function toggle_collapse(id){
+    if($(id + " span").hasClass('glyphicon-plus'))
+    {$(id).html('<span class="glyphicon glyphicon-minus"></span>Hide Chart'); }
+    else
+    {$(id).html('<span class="glyphicon glyphicon-plus"></span>Show Chart'); }} 
+
     function reality_names(){
     return ['black shoppers', 'black shoplifters', 
             'white shoplifters', 'white shoppers'];
@@ -158,5 +177,6 @@
       .nextAll(".output:first")
       .html(data.value.toFixed(1));
       });
-  </script>
+      
+ </script>
 </html>
