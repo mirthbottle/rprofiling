@@ -60,9 +60,7 @@ function initialize_presentation(){
   // groupa bar
   bars['groupa'] = initialize_bar('#groupa', updated_data['groupa']);
 
-  document.getElementById('e').innerHTML = updated_data['e'].toFixed(3);
-  document.getElementById('u').innerHTML = updated_data['u'].toFixed(1);
-
+  update_text(updated_data);
   return bars;
 }
 
@@ -80,7 +78,8 @@ function compute_presentation_data(pa, p1_a, p1_b, pr_a, pr_b){
 			[[ga_names[0], ga_names[1]], 
 			 [ga_names[2], ga_names[3]]]];
 
-  all_data['e'] = compute_efficiency(pa, pr_a, pr_b, profiled_values);
+  all_data['efficiency'] = compute_efficiency(pa, pr_a, pr_b, profiled_values);
+  all_data['effort'] = compute_effort(profiled_values);
   all_data['u'] = compute_unfairness(groupa_values);
 
   return all_data;
@@ -139,6 +138,15 @@ function compute_efficiency(pa, pr_a, pr_b, profiled_values){
   var pb1r = profiled_values[5];
   // overall efficiency of profiler = % of x profiled that are group 1
   var e = 100.0 * (pa1r + pb1r)/(pa*pr_a + (100.0-pa)*pr_b);
+  return +e.toFixed(1);
+}
+
+function compute_effort(profiled_values){
+  var pa1r = profiled_values[2];
+  var pa2r = profiled_values[1];
+  var pb1r = profiled_values[5];
+  var pb2r = profiled_values[6];
+  var e = pa1r + pa2r + pb1r + pb2r;
   return +e.toFixed(1);
 }
 
@@ -213,6 +221,7 @@ function update_bars(bars, updated_data){
 
 
 function update_text(updated_data){
-  document.getElementById('e').innerHTML = updated_data['e'].toFixed(3);
+  document.getElementById('effort').innerHTML = updated_data['effort'].toFixed(1);
+  document.getElementById('efficiency').innerHTML = updated_data['efficiency'].toFixed(3);
   document.getElementById('u').innerHTML = updated_data['u'].toFixed(1);
 }
