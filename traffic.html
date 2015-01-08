@@ -21,7 +21,7 @@
     <script src="javascripts/c3-0.4.8/c3.min.js"></script>
     <script src="javascripts/profiling.js"></script>
 
-    <title>Rprofiling</title>
+    <title>Traffic</title>
 <style>
 
 button.btn-info{
@@ -44,7 +44,7 @@ div.notes {
         <header class="inner">
           <a id="forkme_banner" style="background-color:salmon;" href="https://github.com/mirthbottle/rprofiling">View on GitHub</a>
 
-          <h1 id="project_title">Racial Profiling</h1>
+          <h1 id="project_title">Traffic Stops in Ferguson, MO</h1>
           <h2 id="project_tagline">Explain it to me as if I liked math</h2>
         </header>
     </div>
@@ -52,18 +52,12 @@ div.notes {
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <p>
-	  It's no secret that African Americans are over-represented in the criminal justice system.  Based on this fact, it is widely believed that black people simply commit more crimes than white people<a href="#star">*</a>.  On its face, racial profiling seems like an efficient way to catch criminals.  However, to rephrase the obvious, racial profiling means that you will catch a <strong>higher percentage</strong> of the black criminals, causing them to be overly represented among the criminals that you catch.  This is an attempt to demonstrate that the results tend to <strong>reinforce prejudices</strong> (because human beings are not good at reasoning about probability and cause).<a href="#starstar">**</a></p>
-
-	<h1>example with shoplifting</h1>
-	
-	<h4>
-	  Yes, this is a controversial subject, but it's a simple example to demonstrate the relationship between racial profiling and stereotypes.</h4>
+        <p>On its face, racial profiling seems like an efficient way to catch traffic violators. This is real data about traffic stops from 2013. <a href="http://ago.mo.gov/VehicleStops/2013/reports/161.pdf">http://ago.mo.gov/VehicleStops/2013/reports/161.pdf</a></p>
 	
 	<button id="reality_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#reality" onclick="toggle_collapse('#reality_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
 	<div id='reality' class="collapse in"></div>
 	<p>
-	  <input type='text' name='pa' id='pa' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100"> % black shoppers
+	  <input type='text' name='pa' id='pa' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100"> % black drivers
 	  
 	<p>
 	  <input type='text' name='p1_a' id='p1_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% black shoppers shoplift

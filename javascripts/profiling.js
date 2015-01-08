@@ -163,6 +163,9 @@ function compute_unfairness(groupa_values){
 function initialize_bar(chart_name, data){
   chart = c3.generate({
     bindto: chart_name,
+    size: { height: 200 },
+    bar: { width: { ratio: 1 }},
+    padding: { bottom: 10 },
     data: {
       rows: [data[0], 
 	     data[1]],
@@ -174,11 +177,17 @@ function initialize_bar(chart_name, data){
     axis: {
       rotated: true,
       x: { show: false },
-      y: { show: false }
+      y: { show: true, 
+	   padding: {
+	     top: 0,
+	     bottom: 0}
+	 }
     },
-    legend: { show: false },
+    legend: { show: true },
     tooltip: {
-      format: {	title: function (x) { return '';}}}
+      show: true,
+      grouped: false,
+      format: {	title: function (x) { return '';}}}     
   });
   return chart;
 }
