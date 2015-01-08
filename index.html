@@ -24,23 +24,15 @@
     <title>Rprofiling</title>
 <style>
 
-.chart div {
-  padding: 0px;
-  margin: 0px;
-  height: 80px;
-  color: white;
-  float:left;
-  font-size: 10px;
-  text-align: center;
-  padding-top: 20px;
-}
-
 button.btn-info{
     position:relative;
     top: 30px;
     left: 630px;
 }
 
+div.notes {
+  font-size: 12px;
+}
 </style>
 
   </head>
@@ -89,14 +81,12 @@ button.btn-info{
 
 	<button id="groupa_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#groupa" onclick="toggle_collapse('#groupa_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
 	<div id='groupa' class="collapse in"></div>
-	<h3>
-	  Effort: <span id ="effort"><strong> </strong></span>% shoppers profiled.  This represents the level of surveillance on shoppers.
-	<h3>
-	  Efficiency: <span id ="efficiency"><strong> </strong></span> shoplifters caught per person profiled
-	</h3>
-	<h3>
-	  Unfairness: <span id ="u"><strong> </strong></span>% overrepresentation of African Americans among caught shoplifters
-	</h3>
+	<h3>Effort: <span id ="effort"><strong> </strong></span>% shoppers profiled.  This represents the level of surveillance on shoppers.</h3>
+	<div class="notes">Profiling the minority group more than the larger group is less effort.  Then the smaller group will always be overrepresented among the shoplifters caught.</div>
+	<h3>Efficiency: <span id ="efficiency"><strong> </strong></span> shoplifters caught per person profiled</h3>
+	<div class="notes">If the rate of shoplifting is the same in both groups, then differences in profiling for each group won't affect the rate of shoplifters caught.  If one group has a higher rate of shoplifting then targeting that group for surveillance is the way to maximize efficiency.</div>
+	<h3>Unfairness: <span id ="u"><strong> </strong></span>% overrepresentation of African Americans among caught shoplifters</h3>
+	<div class="notes">Whichever group is profiled more will be overrepresented among the shoplifters caught.  If the rate of shoplifting really is higher among black shoppers, then targeting black shoppers will be both less effort and more efficient.  If the rate of shoplifting is not actually higher, it will still be much less effort.  It would not be obvious that it is less efficient because black shoplifters will be overrepresented among those caught.</div>
 	<br><br><br>
 	<h2>Interaction With Confirmation Bias</h2>
 	
@@ -116,7 +106,7 @@ button.btn-info{
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
-	<p class="copyright">Copyright &copy 2014 <a href="https://github.com/mirthbottle">mirthbottle</a></p>
+	<p class="copyright">Copyright &copy 2015 <a href="https://github.com/mirthbottle">mirthbottle</a></p>
 	<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
