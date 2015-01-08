@@ -1,35 +1,34 @@
-function reality_names(){
-  return ['pa2', 'pa1', 'pb1', 'pb2'];
-}
+// to modify the presentation for other issues, redefine variables
+// at the end of your page 
+// profiling.reality_names, profiling.profiled_names, profiling.groupa_names
+// profiling.presentation_colors
+// 
 
-function profiled_names(){
-  return ['pa2o', 'pa2r', 'pa1r', 'pa1o', 'pb1o', 'pb1r', 'pb2r', 'pb2o'];
-}
 
-function groupa_names(){
-  return ['pa_1', 'pb_1', 'pa_1r', 'pb_1r'];
-}
+var profiling = {};
 
-function presentation_colors(){
-  var colors = {'pa2':"#ffa900",
-		'pa2o':"#ffa900",
-                'pa2r':"#aa9900",
-                'pa1r':"#607100",
-		'pa_1r':"#607100",
-		'pa1':"#607100",
-		'pa_1':"#607100",
-                'pa1o':"#999900",
-                'pb2':"#6272bb",
-		'pb2o':"#6272bb",
-                'pb2r':"#e146ba",
-                'pb1r':"#c51b7d",
-		'pb_1r':"#c51b7d",
-		'pb1':"#c51b7d",
-		'pb_1':"#c51b7d",
-                'pb1o':"#20369e"
-	       }
-  return colors;
-}
+profiling.reality_names = ['pa2', 'pa1', 'pb1', 'pb2'];
+profiling.profiled_names = ['pa2o', 'pa2r', 'pa1r', 'pa1o', 'pb1o', 'pb1r', 'pb2r', 'pb2o'];
+profiling.groupa_names = ['pa_1', 'pb_1', 'pa_1r', 'pb_1r'];
+
+profiling.presentation_colors = {'pa2':"#ffa900",
+				 'pa2o':"#ffa900",
+				 'pa2r':"#aa9900",
+				 'pa1r':"#607100",
+				 'pa_1r':"#607100",
+				 'pa1':"#607100",
+				 'pa_1':"#607100",
+				 'pa1o':"#999900",
+				 'pb2':"#6272bb",
+				 'pb2o':"#6272bb",
+				 'pb2r':"#e146ba",
+				 'pb1r':"#c51b7d",
+				 'pb_1r':"#c51b7d",
+				 'pb1':"#c51b7d",
+				 'pb_1':"#c51b7d",
+				 'pb1o':"#20369e"
+				};
+
 function initialize_presentation(){
   // populate default values of sliders and bars
   // % of population that is group a
@@ -67,13 +66,14 @@ function initialize_presentation(){
 function compute_presentation_data(pa, p1_a, p1_b, pr_a, pr_b){
   var all_data= {};
   var reality_values = compute_reality(pa, p1_a, p1_b); 
-  all_data['reality'] = [reality_names(), reality_values, [reality_names()]];
+  all_data['reality'] = [profiling.reality_names, reality_values, 
+			 [profiling.reality_names]];
 
   var profiled_values = compute_profiled(pa, p1_a, p1_b, pr_a, pr_b, reality_values);
-  all_data['profiled'] = [profiled_names(), profiled_values, [profiled_names()]];
+  all_data['profiled'] = [profiling.profiled_names, profiled_values, [profiling.profiled_names]];
 
   var groupa_values = compute_groupa(reality_values, profiled_values); 
-  var ga_names = groupa_names();
+  var ga_names = profiling.groupa_names;
   all_data['groupa'] = [ga_names, groupa_values,
 			[[ga_names[0], ga_names[1]], 
 			 [ga_names[2], ga_names[3]]]];
@@ -169,7 +169,7 @@ function initialize_bar(chart_name, data){
       type: 'bar',
       order: null,
       groups: data[2],
-      colors: presentation_colors()
+      colors: profiling.presentation_colors
     },
     axis: {
       rotated: true,

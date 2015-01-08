@@ -53,7 +53,7 @@ div.notes {
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <p>
-	  It's no secret that African Americans are over-represented in the criminal justice system.  Based on this fact, it is widely believed that black people simply commit more crimes than white people*.  On its face, racial profiling seems like an efficient way to catch criminals.  However, to rephrase the obvious, racial profiling means that you will catch a <strong>higher percentage</strong> of the black criminals, causing them to be overly represented among the criminals that you catch.  This is an attempt to demonstrate that the results tend to <strong>reinforce prejudices</strong> (because human beings are not good at reasoning about probability and cause).**</p>
+	  It's no secret that African Americans are over-represented in the criminal justice system.  Based on this fact, it is widely believed that black people simply commit more crimes than white people<a href="#star">*</a>.  On its face, racial profiling seems like an efficient way to catch criminals.  However, to rephrase the obvious, racial profiling means that you will catch a <strong>higher percentage</strong> of the black criminals, causing them to be overly represented among the criminals that you catch.  This is an attempt to demonstrate that the results tend to <strong>reinforce prejudices</strong> (because human beings are not good at reasoning about probability and cause).<a href="#starstar">**</a></p>
 
 	<h1>example with shoplifting</h1>
 	
@@ -95,10 +95,11 @@ div.notes {
 	
       </section>
       <section class = "inner">
-	<p>
-	  * I'm going to show that it doesn't really matter whether it is true or not true.  If it's not true, racial profiling will make it seem true.  If it is true, racial profiling will make it seem even more true.</p>
-	<p>
-	  ** Other negative aspects of racial profiling are not investigated here such as how often a black person might be falsely accused.
+	<p id="star">
+	  <span class="glyphicon glyphicon-asterisk"></span> I'm going to show that it doesn't really matter whether it is true or not true.  If it's not true, racial profiling will make it seem true.  If it is true, racial profiling will make it seem even more true.</p>
+	<p id="starstar">
+	  <span class="glyphicon glyphicon-asterisk"></span>
+	  <span class="glyphicon glyphicon-asterisk"></span>  Other negative aspects of racial profiling are not investigated here such as how often a black person might be falsely accused.
 	</p>
       </section>
     </div>
@@ -122,25 +123,19 @@ div.notes {
     else
     {$(id).html('<span class="glyphicon glyphicon-plus"></span>Show Chart'); }} 
 
-    function reality_names(){
-    return ['black shoppers', 'black shoplifters', 
-            'white shoplifters', 'white shoppers'];
-    }
+    profiling.reality_names = ['black shoppers', 'black shoplifters',
+                             'white shoplifters', 'white shoppers'];
+  
     
-    function profiled_names(){
-    return ['black shoppers', 'black shoppers suspected',
+    profiling.profiled_names = ['black shoppers', 'black shoppers suspected',
             'black shoplifters caught', 'black shoplifters uncaught',
             'white shoplifters uncaught', 'white shoplifters caught',
             'white shoppers suspected', 'white shoppers'];
-    }
     
-    function groupa_names(){
-    return ['black shoplifters', 'white shoplifters', 
+    profiling.groupa_names = ['black shoplifters', 'white shoplifters', 
             'black shoplifters caught', 'white shoplifters caught'];
-    }
 
-    function presentation_colors(){
-    var colors = {'black shoppers':"#ffa900",
+    profiling.presentation_colors = {'black shoppers':"#ffa900",
                   'black shoppers suspected':"#aa9900",
                   'black shoplifters caught':"#607100",
                   'black shoplifters uncaught':"#ff7100",
@@ -149,9 +144,7 @@ div.notes {
                   'white shoppers suspected':"#e146ba",
                   'white shoplifters caught':"#c51b7d",
                   'white shoplifters uncaught':"#20369e",
-                  'white shoplifters':"#c51b7d"}
-    return colors;
-    }
+                  'white shoplifters':"#c51b7d"};
 
     var bars =  initialize_presentation();
 
