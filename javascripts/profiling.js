@@ -29,21 +29,16 @@ profiling.presentation_colors = {'pa2':"#ffa900",
 				 'pb1o':"#20369e"
 				};
 
-function initialize_presentation(){
+function initialize_presentation(pa, p1_a, p1_b, pr_a, pr_b){
   // populate default values of sliders and bars
   // % of population that is group a
-  var pa = 10;
   document.getElementById('pa').value = pa.toFixed(1);
   // p(1|x) = % of group x that is group 1
-  var p1_a = 5;
   document.getElementById('p1_a').value = p1_a.toFixed(1);
-  var p1_b = 5;
   document.getElementById('p1_b').value = p1_b.toFixed(1);
   
   // p(r|x) = % of group x that is profiled
-  var pr_a = 90;
   document.getElementById('pr_a').value = pr_a.toFixed(1);
-  var pr_b = 60;
   document.getElementById('pr_b').value = pr_b.toFixed(1);
   
   var updated_data = compute_presentation_data(pa, p1_a, p1_b, pr_a, pr_b);

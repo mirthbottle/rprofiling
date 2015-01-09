@@ -75,12 +75,12 @@ div.notes {
 
 	<button id="groupa_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#groupa" onclick="toggle_collapse('#groupa_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
 	<div id='groupa' class="collapse in"></div>
-	<h3>Effort: <span id ="effort"><strong> </strong></span>% shoppers profiled.  This represents the level of surveillance on shoppers.</h3>
-	<div class="notes">Profiling the minority group more than the larger group is less effort.  Then the smaller group will always be overrepresented among the shoplifters caught.</div>
-	<h3>Efficiency: <span id ="efficiency"><strong> </strong></span> shoplifters caught per person profiled</h3>
-	<div class="notes">If the rate of shoplifting is the same in both groups, then differences in profiling for each group won't affect the rate of shoplifters caught.  If one group has a higher rate of shoplifting then targeting that group for surveillance is the way to maximize efficiency.</div>
-	<h3>Unfairness: <span id ="u"><strong> </strong></span>% overrepresentation of African Americans among caught shoplifters</h3>
-	<div class="notes">Whichever group is profiled more will be overrepresented among the shoplifters caught.  If the rate of shoplifting really is higher among black shoppers, then targeting black shoppers will be both less effort and more efficient.  If the rate of shoplifting is not actually higher, it will still be much less effort.  It would not be obvious that it is less efficient because black shoplifters will be overrepresented among those caught.</div>
+	<h3>Effort: <span id ="effort"><strong> </strong></span>% drivers stopped.  This represents the level of surveillance on drivers.</h3>
+	<div class="notes"></div>
+	<h3>Efficiency: <span id ="efficiency"><strong> </strong></span> drivers who got a citation per driver stopped</h3>
+	<div class="notes"></div>
+	<h3>Unfairness: <span id ="u"><strong> </strong></span>% overrepresentation of black violators among drivers stopped</h3>
+	<div class="notes"></div>
 	<br><br><br>
 	<h2>Interaction With Confirmation Bias</h2>
 	
@@ -89,12 +89,7 @@ div.notes {
 	
       </section>
       <section class = "inner">
-	<p id="star">
-	  <span class="glyphicon glyphicon-asterisk"></span> I'm going to show that it doesn't really matter whether it is true or not true.  If it's not true, racial profiling will make it seem true.  If it is true, racial profiling will make it seem even more true.</p>
-	<p id="starstar">
-	  <span class="glyphicon glyphicon-asterisk"></span>
-	  <span class="glyphicon glyphicon-asterisk"></span>  Other negative aspects of racial profiling are not investigated here such as how often a black person might be falsely accused.
-	</p>
+
       </section>
     </div>
     
@@ -117,30 +112,35 @@ div.notes {
     else
     {$(id).html('<span class="glyphicon glyphicon-plus"></span>Show Chart'); }} 
 
-    profiling.reality_names = ['black shoppers', 'black shoplifters',
-                             'white shoplifters', 'white shoppers'];
+    profiling.reality_names = ['black drivers', 'black traffic offenders',
+                             'white traffic offenders', 'white drivers'];
   
     
-    profiling.profiled_names = ['black shoppers', 'black shoppers suspected',
-            'black shoplifters caught', 'black shoplifters uncaught',
-            'white shoplifters uncaught', 'white shoplifters caught',
-            'white shoppers suspected', 'white shoppers'];
+    profiling.profiled_names = ['black drivers', 'black drivers stopped',
+            'black drivers ticketed', 'black offenders missed',
+            'white offenders missed', 'white drivers ticketed',
+            'white drivers stopped', 'white drivers'];
     
-    profiling.groupa_names = ['black shoplifters', 'white shoplifters', 
-            'black shoplifters caught', 'white shoplifters caught'];
+    profiling.groupa_names = ['black traffic offenders', 'white traffic offenders', 
+            'black drivers ticketed', 'white drivers ticketed'];
 
-    profiling.presentation_colors = {'black shoppers':"#ffa900",
-                  'black shoppers suspected':"#aa9900",
-                  'black shoplifters caught':"#607100",
-                  'black shoplifters uncaught':"#ff7100",
-                  'black shoplifters':"#999900",
-                  'white shoppers':"#6272bb",
-                  'white shoppers suspected':"#e146ba",
-                  'white shoplifters caught':"#c51b7d",
-                  'white shoplifters uncaught':"#20369e",
-                  'white shoplifters':"#c51b7d"};
+    profiling.presentation_colors = {'black drivers':"#ffa900",
+                  'black drivers stopped':"#aa9900",
+                  'black drivers ticketed':"#607100",
+                  'black offenders missed':"#ff7100",
+                  'black traffic offenders':"#999900",
+                  'white drivers':"#6272bb",
+                  'white drivers stopped':"#e146ba",
+                  'white drivers ticketed':"#c51b7d",
+                  'white offenders missed':"#20369e",
+                  'white traffic offenders':"#c51b7d"};
 
-    var bars =  initialize_presentation();
+    // total population of drivers is 15,865
+    // % black driveres stopped is 4676/15865 = 29%
+    // 4257/4676 of black drivers get a ticket = 91%
+    // 600/690 of white drivers get a ticket = 87%
+    // % white drivers stopped is 690/15865 = 4.3%
+    var bars =  initialize_presentation(66, 91, 87, 29, 4.3);
 
     $("[data-slider]")
     .each(function () {
