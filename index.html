@@ -74,8 +74,12 @@ div.notes {
 	  <p>
 	    <input type='text' name='pr_a' id='pr_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
 	    % black shoppers suspected of shoplifting
-	    <input type='text' name='pr_b' id='pr_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="0.01" data-slider-range="0, 100">
-	    % white shoppers suspected of shoplifting</p>
+	    <input type='text' name='p1_ra' id='p1_ra' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
+	    % black shoppers suspected who shoplifted 
+	    <input type='text' name='pr_b' id='pr_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
+	    % white shoppers suspected of shoplifting
+	    <input type='text' name='p1_rb' id='p1_rb' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
+	    % white shoppers suspected who shoplifted </p>
 	</div>
 
 	<button id="groupa_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#groupa" onclick="toggle_collapse('#groupa_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
@@ -83,7 +87,7 @@ div.notes {
 	<h3>Effort: <span id ="effort"><strong> </strong></span>% shoppers profiled.  This represents the level of surveillance on shoppers.</h3>
 	<div class="notes">Profiling the minority group more than the larger group is less effort.  Then the smaller group will always be overrepresented among the shoplifters caught.</div>
 	<h3>Efficiency: <span id ="efficiency"><strong> </strong></span> shoplifters caught per person profiled</h3>
-	<div class="notes">If the rate of shoplifting is the same in both groups, then differences in profiling for each group won't affect the rate of shoplifters caught.  If one group has a higher rate of shoplifting then targeting that group for surveillance is the way to maximize efficiency.</div>
+	<div class="notes"></div>
 	<h3>Unfairness: <span id ="u"><strong> </strong></span>% overrepresentation of African Americans among caught shoplifters</h3>
 	<div class="notes">Whichever group is profiled more will be overrepresented among the shoplifters caught.  If the rate of shoplifting really is higher among black shoppers, then targeting black shoppers will be both less effort and more efficient.  If the rate of shoplifting is not actually higher, it will still be much less effort.  It would not be obvious that it is less efficient because black shoplifters will be overrepresented among those caught.</div>
 	<br><br><br>
@@ -145,7 +149,7 @@ div.notes {
                   'white shoplifters uncaught':"#20369e",
                   'white shoplifters':"#c51b7d"};
 
-    var bars =  initialize_presentation(10, 5, 5, 90, 60);
+    var bars =  initialize_presentation(0.10, 0.05, 0.05, 0.20, 0.08, 0.20, 0.30);
 
     $("[data-slider]")
     .each(function () {

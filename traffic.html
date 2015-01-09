@@ -69,8 +69,12 @@ div.notes {
 	  <p>
 	    <input type='text' name='pr_a' id='pr_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
 	    % black drivers who are stopped by police
+	    <input type='text' name='p1_ra' id='p1_ra' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
+	    % black drivers stopped who got ticketed
 	    <input type='text' name='pr_b' id='pr_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="0.01" data-slider-range="0, 100">
-	    % white drivers who are stopped by police</p>
+	    % white drivers who are stopped by police
+	    <input type='text' name='p1_rb' id='p1_rb' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
+	    % white drivers stopped who were ticketed </p>
 	</div>
 
 	<button id="groupa_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#groupa" onclick="toggle_collapse('#groupa_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
@@ -140,7 +144,7 @@ div.notes {
     // 4257/4676 of black drivers get a ticket = 91%
     // 600/690 of white drivers get a ticket = 87%
     // % white drivers stopped is 690/15865 = 4.3%
-    var bars =  initialize_presentation(66, 91, 87, 29, 4.3);
+    var bars =  initialize_presentation(0.66, 0.25, 0.1, 0.29, 0.043, 0.91, 0.87);
 
     $("[data-slider]")
     .each(function () {
