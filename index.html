@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
     <link href="stylesheets/simple-slider.css" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/spinner.css" rel="stylesheet" type="text/css" />
 
     <!-- Load c3.css -->
     <link href="javascripts/c3-0.4.8/c3.css" rel="stylesheet" type="text/css">
@@ -71,15 +72,42 @@ div.notes {
 	<button id="profiled_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#profiled" onclick="toggle_collapse('#profiled_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
 	<div id='profiled' class="collapse in"></div>
 	<div id='ptext'>
-	  <p>
-	    <input type='text' name='pr_a' id='pr_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
-	    % black shoppers suspected of shoplifting
-	    <input type='text' name='p1_ra' id='p1_ra' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
-	    % black shoppers suspected who shoplifted 
-	    <input type='text' name='pr_b' id='pr_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
-	    % white shoppers suspected of shoplifting
-	    <input type='text' name='p1_rb' id='p1_rb' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">
-	    % white shoppers suspected who shoplifted </p>
+	  <p><input type='text' name='pr_a' id='pr_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">%
+	  black shoppers suspected of shoplifting</p>
+	  <div class="row">
+	    <div class="col-lg-9"> The probability that a suspected black shopper actually shoplifted.</div>
+	    <div class="col-lg-2">
+	      <div class="input-group spinner">
+		<input id="p1_ra" type="text" class="form-control" onchange='update_presentation(bars)'>
+		<div class="input-group-btn-vertical">
+		  <button id="up_p1_ra" class="btn btn-default">
+		    <i class="glyphicon glyphicon-chevron-up"></i></button>
+		  <button id="down_p1_ra" class="btn btn-default">
+		    <i class="glyphicon glyphicon-chevron-down"></i></button>
+		</div>
+	      </div>
+		      
+	    </div>
+	  </div>
+	  <p>This represents how good the surveillance is at detecting shoplifting and distinguishing shoplifters from regular shoppers.</p> 
+	  <p>Compare this with <span id='p1_oa'></span>, the probability that shopper who is not flagged by surveillance actually shoplifted.</p>
+	  <p><input type='text' name='pr_b' id='pr_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">%
+	  white shoppers suspected of shoplifting</p>
+	  <div class="row">
+	    <div class="col-lg-9"> probability that a suspected white shopper actually shoplifted</div>
+	    <div class="col-lg-2">
+	      <div class="input-group spinner">
+		<input id="p1_rb" type="text" class="form-control" onchange='update_presentation(bars)'>
+		<div class="input-group-btn-vertical">
+		  <button id="up_p1_rb" class="btn btn-default">
+		    <i class="glyphicon glyphicon-chevron-up"></i></button>
+		  <button id="down_p1_rb" class="btn btn-default">
+		    <i class="glyphicon glyphicon-chevron-down"></i></button>
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	  <p>Compare this with <span id='p1_ob'></span>, the probability that a shopper who is not flagged by surveillance actually shoplifted.</p>
 	</div>
 
 	<button id="groupa_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#groupa" onclick="toggle_collapse('#groupa_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
@@ -164,5 +192,28 @@ div.notes {
       .html(data.value.toFixed(1));
       });
       
- </script>
+      $('#up_p1_ra').on('click', function() {
+      var v = $('#p1_ra').val();
+      $('#p1_ra').val(Math.min(+v + 0.01, 1).toFixed(2));
+      update_presentation(bars);
+      });
+
+      $('#up_p1_rb').on('click', function() {
+      var v = $('#p1_rb').val();
+      $('#p1_rb').val(Math.min(+v + 0.01, 1).toFixed(2));
+      update_presentation(bars);
+      });
+
+      $('#down_p1_ra').on('click', function() {
+      var v = $('#p1_ra').val();
+      $('#p1_ra').val(Math.max(+v - 0.01, 0).toFixed(2));
+      update_presentation(bars);
+      });
+      
+      $('#down_p1_rb').on('click', function() {
+      var v = $('#p1_rb').val();
+      $('#p1_rb').val(Math.max(+v - 0.01, 0).toFixed(2));
+      update_presentation(bars);
+      });
+  </script>
 </html>

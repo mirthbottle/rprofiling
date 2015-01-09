@@ -40,8 +40,8 @@ function initialize_presentation(pa, p1_a, p1_b, pr_a, pr_b, p1_ra, p1_rb){
   // p(r|x) = % of group x that is profiled
   document.getElementById('pr_a').value = (100*pr_a).toFixed();
   document.getElementById('pr_b').value = (100*pr_b).toFixed();
-  document.getElementById('p1_ra').value = (100*p1_ra).toFixed();
-  document.getElementById('p1_rb').value = (100*p1_rb).toFixed();
+  document.getElementById('p1_ra').value = (p1_ra).toFixed(2);
+  document.getElementById('p1_rb').value = (p1_rb).toFixed(2);
   
   var updated_data = compute_presentation_data(pa, p1_a, p1_b, pr_a, pr_b, p1_ra, p1_rb);
   
@@ -65,10 +65,16 @@ function compute_presentation_data(pa, p1_a, p1_b, pr_a, pr_b, p1_ra, p1_rb){
   var reality_values = compute_reality(pa, p1_a, p1_b); 
   all_data['reality'] = [profiling.reality_names, reality_values, 
 			 [profiling.reality_names]];
+   
+  p1_ra = max_profile_skill(p1_a, pr_a, p1_ra);
+  p1_rb = max_profile_skill(p1_b, pr_b, p1_rb);
 
   var profiled_values = compute_profiled(pa, p1_a, p1_b, pr_a, pr_b, 
 					 p1_ra, p1_rb, reality_values);
+ 
   all_data['profiled'] = [profiling.profiled_names, profiled_values, [profiling.profiled_names]];
+
+  all_data['profile_skill'] = compute_profile_skill(p1_ra, p1_rb, profiled_values);
 
   var groupa_values = compute_groupa(reality_values, profiled_values); 
   var ga_names = profiling.groupa_names;
@@ -93,6 +99,11 @@ function compute_reality(pa, p1_a, p1_b){
   return [+pa2.toFixed(3), +pa1.toFixed(3), +pb1.toFixed(3), +pb2.toFixed(3)];
 }
 
+function max_profile_skill(p1_x,  pr_x, p1_rx){
+  p1_rx = Math.min(p1_rx, p1_x/pr_x);
+  return +p1_rx.toFixed(3);
+}
+
 function compute_profiled(pa, p1_a, p1_b, pr_a, pr_b, p1_ra, p1_rb, reality_values){
   var pa2 = reality_values[0];
   var pa1 = reality_values[1];
@@ -101,19 +112,31 @@ function compute_profiled(pa, p1_a, p1_b, pr_a, pr_b, p1_ra, p1_rb, reality_valu
 
   // p(r|x) = p(r| (x && 1)) = % of subgroup x1 that is profiled 
   // p(x && y && r) = % of total that is subgroup xy and profiled
-  var pa1r = Math.min(pa*pr_a*p1_ra, pa1);
+  var pa1r = pa*pr_a*p1_ra;
   // p(x && y && !r) = % of total that is subgroup xy and not profiled
-  var pa1o = Math.max(pa1 - pa1r, 0);
-  var pa2r = Math.max(pr_a*pa - pa1r, 0);
-  var pa2o = Math.max(pa2 - pa2r, 0);
+  var pa1o = pa1 - pa1r;
+  var pa2r = pr_a*pa - pa1r;
+  var pa2o = pa2 - pa2r;
 
-  var pb1r = Math.min((1-pa)*pr_b*p1_rb, pb1);
-  var pb1o = Math.max(pb1 - pb1r, 0);
-  var pb2r = Math.max((1-pa)*pr_b -pb1r, 0);
-  var pb2o = Math.max(pb2 - pb2r, 0);
+  var pb1r = (1-pa)*pr_b*p1_rb;
+  var pb1o = pb1 - pb1r;
+  var pb2r = (1-pa)*pr_b -pb1r;
+  var pb2o = pb2 - pb2r;
 
   return [+pa2o.toFixed(4), +pa2r.toFixed(4), +pa1r.toFixed(4), +pa1o.toFixed(4), +pb1o.toFixed(4), +pb1r.toFixed(4), +pb2r.toFixed(4), +pb2o.toFixed(4)];
 }
+
+function compute_profile_skill(p1_ra, p1_rb, profiled_values){
+  var pa2o = profiled_values[0];
+  var pa1o = profiled_values[3];
+  var pb1o = profiled_values[4];
+  var pb2o = profiled_values[7];
+  var p1_oa = pa1o/(pa1o + pa2o);
+  var p1_ob = pb1o/(pb1o + pb2o);
+
+  return [+p1_oa.toFixed(3), +p1_ob.toFixed(3), +p1_ra.toFixed(3), +p1_rb.toFixed(3)];
+}
+
 
 function compute_groupa(reality_values, profiled_values){
   var pa1r = profiled_values[2];
@@ -204,8 +227,8 @@ function update_presentation(bars) {
   // p(r|x) = % of group x that is profiled
   var pr_a = document.getElementById('pr_a').value/100;
   var pr_b = document.getElementById('pr_b').value/100;
-  var p1_ra = document.getElementById('p1_ra').value/100;
-  var p1_rb = document.getElementById('p1_rb').value/100;
+  var p1_ra = document.getElementById('p1_ra').value;
+  var p1_rb = document.getElementById('p1_rb').value;
 
   var updated_data = compute_presentation_data(pa, p1_a, p1_b, pr_a, pr_b, p1_ra, p1_rb);
 
@@ -232,6 +255,14 @@ function update_bars(bars, updated_data){
 
 
 function update_text(updated_data){
+  var p1_oa = updated_data['profile_skill'][0];
+  var p1_ob = updated_data['profile_skill'][1];
+  var p1_ra = updated_data['profile_skill'][2];
+  var p1_rb = updated_data['profile_skill'][3];
+  document.getElementById('p1_ra').value = (p1_ra).toFixed(2);
+  document.getElementById('p1_rb').value = (p1_rb).toFixed(2);
+  document.getElementById('p1_oa').innerHTML = (p1_oa).toFixed(2);
+  document.getElementById('p1_ob').innerHTML = (p1_ob).toFixed(2);
   document.getElementById('effort').innerHTML = (100*updated_data['effort']).toFixed();
   document.getElementById('efficiency').innerHTML = updated_data['efficiency'].toFixed(3);
   document.getElementById('u').innerHTML = (100*updated_data['u']).toFixed();
