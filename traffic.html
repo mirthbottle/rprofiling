@@ -53,22 +53,13 @@ div.notes {
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <p>On its face, racial profiling seems like an efficient way to catch traffic violators. This is real data about traffic stops from 2013. <a href="http://ago.mo.gov/VehicleStops/2013/reports/161.pdf">http://ago.mo.gov/VehicleStops/2013/reports/161.pdf</a></p>
-	
-	<button id="reality_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#reality" onclick="toggle_collapse('#reality_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
-	<div id='reality' class="collapse in"></div>
+        <p>On its face, racial profiling seems like an efficient way to catch traffic violators. It would be efficient and fair if people of color really violate traffic laws more (at a higher rate) than white people.  However, recently the US Department of Justice released a <a href="http://www.justice.gov/sites/default/files/opa/press-releases/attachments/2015/03/04/ferguson_police_department_report.pdf">report</a> that the profiling led African Americans in Ferguson to be "driven in part by racial bias." </p>
+	<p>Why did they conclude it was unfair racial bias?  Well, in truth, it is hard to be absolutely sure.  What you can do, though, is take a look at the actual data about traffic stops and tickets (for example) and assume first that the police were fair.  Then you can infer the true rates of traffic violations are for the black Americans compared to the white Americans.  Finally, you ask yourself whether the difference is really plausible or not.</p>
 	<p>
 	  <input type='text' name='pa' id='pa' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% black drivers
-	  
-	<p>
-	  <h4>True rates of traffic violations.</h4>
-	  The true rates cannot be explicitly measured.  Pick ones that you think are reasonable.  Then see if they are consistent with the outcomes.  
-	  <input type='text' name='p1_a' id='p1_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% black drivers deserve
-	  <input type='text' name='p1_b' id='p1_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% white drivers deserve tickets</p>
-
-	<button id="profiled_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#profiled" onclick="toggle_collapse('#profiled_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
-	<div id='profiled' class="collapse in"></div>
-	<div id='ptext'>
+	</p>
+	
+	<div id='ptext'>  
 	  <p><input type='text' name='pr_a' id='pr_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% 
 	    black drivers stopped by police</p>
 	  <div class="row">
@@ -85,7 +76,6 @@ div.notes {
 	      </div>
 	    </div>
 	  </div>
-	  <p>Compare this with <span id='p1_oa'></span>, the probability that black drive who is not stopped by police actually should have been ticketed.</p>
 	  <p><input type='text' name='pr_b' id='pr_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="0.01" data-slider-range="0, 100">%
 	    white drivers stopped by police</p>
 	  <div class="row">
@@ -102,8 +92,20 @@ div.notes {
 	      </div>
 	    </div>
 	  </div>
-	  <p>Compare this with <span id='p1_ob'></span>, the probability that a white drive who is not stopped actually should have been ticketed.</p>
 	</div>
+	
+	<h4>Implied true rates of traffic violations.</h4>
+	The true rates cannot be explicitly measured but they can be inferred from the outcomes.  If the rates of stops and ticketing were really fair, that means that if the true rate of traffic violations by white drivers is 4%, then 29% of black drivers violated traffic in 2013.  That kind of difference in drivers is not plausible.  That means that the police were almost certainly unfairly profiling based on race.
+	
+	<button id="reality_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#reality" onclick="toggle_collapse('#reality_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
+	<div id='reality' class="collapse in"></div>
+
+	<input type='text' name='p1_a' id='p1_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% black drivers violated traffic and should have been ticketed
+	<input type='text' name='p1_b' id='p1_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% white drivers violated traffic
+
+	<button id="profiled_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#profiled" onclick="toggle_collapse('#profiled_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
+	<div id='profiled' class="collapse in"></div>
+	
 
 	<button id="groupa_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#groupa" onclick="toggle_collapse('#groupa_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
 	<div id='groupa' class="collapse in"></div>
@@ -119,6 +121,8 @@ div.notes {
 	<p>
 	  This is a separate effect from confirmation bias, which is where you are more likely to notice "facts" that are consistent with your world view.  This result shows that even without confirmation bias, which we all have, we are likely to believe things that aren't true simply because we are <strong>also</strong> bad at reasoning about probability.</p>
 	
+	 <p>Compare this with <span id='p1_oa'></span>, the probability that a black driver who is not stopped by police actually should have been ticketed.</p>
+	<p>Compare this with <span id='p1_ob'></span>, the probability that a white drive who is not stopped actually should have been ticketed.</p>
       </section>
       <section class = "inner">
 
@@ -172,7 +176,7 @@ div.notes {
     // 4257/4676 of black drivers get a ticket = 91%
     // 600/690 of white drivers get a ticket = 87%
     // % white drivers stopped is 690/15865 = 4.3%
-    var bars =  initialize_presentation(0.66, 0.28, 0.1, 0.29, 0.043, 0.91, 0.87);
+    var bars =  initialize_presentation(0.66, 0.29, 0.04, 0.29, 0.043, 0.91, 0.87);
 
     $("[data-slider]")
     .each(function () {
