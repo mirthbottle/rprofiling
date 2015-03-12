@@ -25,7 +25,7 @@
     <title>Traffic</title>
 <style>
 
-button.btn-info{
+  button.btn-info{
     position:relative;
     top: 30px;
     left: 630px;
@@ -95,19 +95,22 @@ div.notes {
 	</div>
 	
 	<h4>Implied true rates of traffic violations.</h4>
-	The true rates cannot be explicitly measured but they can be inferred from the outcomes.  If the rates of stops and ticketing were really fair, that means that if the true rate of traffic violations by white drivers is 4%, then 29% of black drivers violated traffic in 2013.  That kind of difference in drivers is not plausible.  That means that the police were almost certainly unfairly profiling based on race.
+	<p>The true rates cannot be explicitly measured but they can be inferred from the outcomes.  If the rates of stops and ticketing were really fair, that means that if the true rate of traffic violations by white drivers is 5%, then 35% of black drivers violated traffic in 2013.  That kind of difference in drivers is not plausible.  That means that the police were almost certainly unfairly profiling based on race.</p>
 	
-	<button id="reality_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#reality" onclick="toggle_collapse('#reality_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
+	<button id="reality_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#reality" onclick="toggle_collapse('#reality_btn')">
+	  <span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
 	<div id='reality' class="collapse in"></div>
-
+	<p>
 	<input type='text' name='p1_a' id='p1_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% black drivers violated traffic and should have been ticketed
 	<input type='text' name='p1_b' id='p1_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% white drivers violated traffic
-
-	<button id="profiled_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#profiled" onclick="toggle_collapse('#profiled_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
+	</p>
+	<button id="profiled_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#profiled" onclick="toggle_collapse('#profiled_btn')">
+	  <span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
 	<div id='profiled' class="collapse in"></div>
 	
-
-	<button id="groupa_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#groupa" onclick="toggle_collapse('#groupa_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
+	
+	<button id="groupa_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#groupa" onclick="toggle_collapse('#groupa_btn')">
+	  <span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
 	<div id='groupa' class="collapse in"></div>
 	<h3>Effort: <span id ="effort"><strong> </strong></span>% drivers stopped.  This represents the level of surveillance on drivers.</h3>
 	<div class="notes"></div>
@@ -176,7 +179,7 @@ div.notes {
     // 4257/4676 of black drivers get a ticket = 91%
     // 600/690 of white drivers get a ticket = 87%
     // % white drivers stopped is 690/15865 = 4.3%
-    var bars =  initialize_presentation(0.66, 0.29, 0.04, 0.29, 0.043, 0.91, 0.87);
+    var bars =  initialize_presentation(0.66, 0.35, 0.05, 0.29, 0.043, 0.91, 0.87);
 
     $("[data-slider]")
     .each(function () {
