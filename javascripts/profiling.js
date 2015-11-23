@@ -247,18 +247,25 @@ function update_presentation(bars) {
 }
 
 function update_bars(bars, updated_data){
-  bars['reality'] = update_bar('reality', bar['reality'], updated_data)
-  bars['profiled'] = update_bar('profiled', bar['profiled'], updated_data)
-  bars['reality1'] = update_bar('reality1', bar['reality1'], updated_data)
-  bars['outcome'] = update_bar('outcome', bar['outcome'], updated_data)
-}
-
-function update_bar(chartname, bar, updated_data){
-  b = bar.load({
-    rows: [updated_data['chartname'][0], updated_data['chartname'][1]],
-    unload: [updated_data['chartname'][0]]
+  bars['reality'].load({
+    rows: [updated_data['reality'][0], updated_data['reality'][1]],
+    unload: [updated_data['reality'][0]]
   });
-  return b
+  
+  bars['reality1'].load({
+    rows: [updated_data['reality1'][0], updated_data['reality1'][1]],
+    unload: [updated_data['reality1'][0]]
+  });
+  
+  bars['profiled'].load({
+    rows: [updated_data['profiled'][0], updated_data['profiled'][1]],
+    unload: [updated_data['profiled'][0]]
+  });
+  
+  bars['outcome'].load({
+    rows: [updated_data['outcome'][0], updated_data['outcome'][1]],
+    unload: [updated_data['outcome'][0]]
+  });
 }
 
 function update_text(updated_data){
