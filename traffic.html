@@ -105,17 +105,19 @@ div.notes {
 	Unfortunately, it's not possible from this information to determine the true rates of traffic violations.  Instead, we can backsolve the true rates of traffic violations in the case that the outcome is fair. 
 	<p>In this case, the demographics of true traffic violators should be the same as the demographics of the traffic violators that are caught and ticketed.</p>
 	<p>It's reasonable to assume that there are some white drivers who violate traffic who avoid being stopped and ticketed.  Then the true rate of offenders must be somewhat more than 4%.  Let's say it's 5%.  This implies that 35% of black drivers violate traffic.</p>
-	<input type='text' name='p1_b' id='p1_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% of white drivers who violate traffic</p>
-	<input type='text' name='p1_a' id='p1_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% of black drivers who violate traffic
+	<input type='text' name='p1_b' id='p1_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% of white drivers violate traffic</p>
+	<input type='text' name='p1_a' id='p1_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% of black drivers violate traffic
 	
 	<p> The result is that 93% of actual traffic violators are black, which is the same breakdown among those that are ticketed.</p>
 	<button id="reality1_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#reality1" onclick="toggle_collapse('#reality1_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
 	<div id='reality1' class="collapse in"></div>
-
+	
+	<p> The difference in the rate of traffic violators doesn't seem to make sense.  The chart below shows...  It implies that many black offenders actually are not stopped and therefore more should be stopped.</p>
 	
 	<button id="profiled_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#profiled" onclick="toggle_collapse('#profiled_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
 	<div id='profiled' class="collapse in"></div>
 
+	<p> If white drivers offend traffic at a slightly higher rate, 7%, then 50% of black drivers violate traffic which is surely not possible.  If white drivers violate traffic at 15%, then 100% of black drivers are violating traffic.  Play with the sliders yourself to where you think is reasonable.</p>
 	<div id='ptext'>	  
 	  <p>Compare this with <span id='p1_oa'></span>, the probability that a black driver who is not stopped by police actually should have been ticketed.</p>
 	  
