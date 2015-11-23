@@ -24,9 +24,7 @@
 
     <title>Traffic</title>
 <style>
-body {
-  font-size: 20px;
-}
+
 button.btn-info{
     position:relative;
     top: 30px;
@@ -56,69 +54,59 @@ div.notes {
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <p>On its face, racial profiling seems like an efficient way to catch traffic violators. This is real data about traffic stops from 2013. <a href="http://ago.mo.gov/VehicleStops/2013/reports/161.pdf">http://ago.mo.gov/VehicleStops/2013/reports/161.pdf</a></p>
-
-	<p>Among the drivers that got tickets, 93% of them were black</p>
-	<button id="outcome_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#outcome" onclick="toggle_collapse('#outcome_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
-	<div id='outcome' class="collapse in"></div>
-
-	<p>
-	  <input type='text' name='pa' id='pa' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% of the drivers on the road are black.  
-	  While there are more black drivers, they are overrepresented among those that got tickets.
 	
-	<p> There are several reasons why they could be overrepresented.  One is that more of them are caught because of racial profiling.  Black drivers are indeed more likely to be stopped.
-
-	<p><input type='text' name='pr_a' id='pr_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% 
-	    black drivers stopped by police</p>
-	<p><input type='text' name='pr_b' id='pr_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="0.01" data-slider-range="0, 100">%
-	    white drivers stopped by police</p>
-
-	<p>However, black drivers who are stopped are still more likely to be ticketed, which implies that black drivers really violate traffic laws at a greater rate the white drivers.  On the other hand, it could instead mean that determining whether there was a traffic violation is not objective either, and that black drivers are just more likely to get tickets.
-	<div class="row">
-	  <div class="col-lg-9">The proportion of black drivers stopped who got ticketed</div>
-	  <div class="col-lg-2">
-	    <div class="input-group spinner">
-	      <input id="p1_ra" type="text" class="form-control" onchange='update_presentation(bars)'>
-	      <div class="input-group-btn-vertical">
-		<button id="up_p1_ra" class="btn btn-default">
-		  <i class="glyphicon glyphicon-chevron-up"></i></button>
-		<button id="down_p1_ra" class="btn btn-default">
-		  <i class="glyphicon glyphicon-chevron-down"></i></button>
-	      </div>
-	    </div>
-	  </div>
-	</div>	
-	<div class="row">
-	  <div class="col-lg-9">The proportion of white drivers stopped who got ticketed</div>
-	  <div class="col-lg-2">
-	    <div class="input-group spinner">
-	      <input id="p1_rb" type="text" class="form-control" onchange='update_presentation(bars)'>
-	      <div class="input-group-btn-vertical">
-		<button id="up_p1_rb" class="btn btn-default">
-		  <i class="glyphicon glyphicon-chevron-up"></i></button>
-		<button id="down_p1_rb" class="btn btn-default">
-		  <i class="glyphicon glyphicon-chevron-down"></i></button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<h4>True rates of traffic violations.</h4>
-	Unfortunately, it's not possible from this information to determine the true rates of traffic violations.  Instead, we can backsolve the true rates of traffic violations in the case that the outcome is fair. In this case, the demographics of true traffic violators should be the same as the demographics of the traffic violators that are caught and ticketed.
-
-	<button id="groupa_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#profiled" onclick="toggle_collapse('#groupa_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
-	<div id='reality1' class="collapse in"></div>
-
-	<input type='text' name='p1_a' id='p1_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% black drivers deserve
-	<input type='text' name='p1_b' id='p1_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% white drivers deserve tickets</p>
+	<button id="reality_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#reality" onclick="toggle_collapse('#reality_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
+	<div id='reality' class="collapse in"></div>
+	<p>
+	  <input type='text' name='pa' id='pa' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% black drivers
+	  
+	<p>
+	  <h4>True rates of traffic violations.</h4>
+	  The true rates cannot be explicitly measured.  Pick ones that you think are reasonable.  Then see if they are consistent with the outcomes.  
+	  <input type='text' name='p1_a' id='p1_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% black drivers deserve
+	  <input type='text' name='p1_b' id='p1_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% white drivers deserve tickets</p>
 
 	<button id="profiled_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#profiled" onclick="toggle_collapse('#profiled_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
 	<div id='profiled' class="collapse in"></div>
-	<div id='ptext'>	  
-	  <p>Compare this with <span id='p1_oa'></span>, the probability that a black driver who is not stopped by police actually should have been ticketed.</p>
-	  
-	  <p>Compare this with <span id='p1_ob'></span>, the probability that a white driver who is not stopped actually should have been ticketed.</p>
+	<div id='ptext'>
+	  <p><input type='text' name='pr_a' id='pr_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% 
+	    black drivers stopped by police</p>
+	  <div class="row">
+	    <div class="col-lg-9">proportion of black drivers stopped who got ticketed</div>
+	    <div class="col-lg-2">
+	      <div class="input-group spinner">
+		<input id="p1_ra" type="text" class="form-control" onchange='update_presentation(bars)'>
+		<div class="input-group-btn-vertical">
+		  <button id="up_p1_ra" class="btn btn-default">
+		    <i class="glyphicon glyphicon-chevron-up"></i></button>
+		  <button id="down_p1_ra" class="btn btn-default">
+		    <i class="glyphicon glyphicon-chevron-down"></i></button>
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	  <p>Compare this with <span id='p1_oa'></span>, the probability that black drive who is not stopped by police actually should have been ticketed.</p>
+	  <p><input type='text' name='pr_b' id='pr_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="0.01" data-slider-range="0, 100">%
+	    white drivers stopped by police</p>
+	  <div class="row">
+	    <div class="col-lg-9"> proportion of white drivers stopped who got ticketed</div>
+	    <div class="col-lg-2">
+	      <div class="input-group spinner">
+		<input id="p1_rb" type="text" class="form-control" onchange='update_presentation(bars)'>
+		<div class="input-group-btn-vertical">
+		  <button id="up_p1_rb" class="btn btn-default">
+		    <i class="glyphicon glyphicon-chevron-up"></i></button>
+		  <button id="down_p1_rb" class="btn btn-default">
+		    <i class="glyphicon glyphicon-chevron-down"></i></button>
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	  <p>Compare this with <span id='p1_ob'></span>, the probability that a white drive who is not stopped actually should have been ticketed.</p>
 	</div>
-	<button id="reality_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#reality" onclick="toggle_collapse('#reality_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
-	<div id='reality' class="collapse in"></div>
+
+	<button id="groupa_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#groupa" onclick="toggle_collapse('#groupa_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
+	<div id='groupa' class="collapse in"></div>
 	<h3>Effort: <span id ="effort"><strong> </strong></span>% drivers stopped.  This represents the level of surveillance on drivers.</h3>
 	<div class="notes"></div>
 	<h3>Efficiency: <span id ="efficiency"><strong> </strong></span> drivers who got a citation per driver stopped</h3>
@@ -165,9 +153,8 @@ div.notes {
             'white offenders missed', 'white drivers ticketed',
             'white drivers stopped', 'white drivers'];
     
-    profiling.reality1_names = ['black traffic offenders', 'white traffic offenders'];
-
-    profiling.outcome_names = ['black drivers ticketed', 'white drivers ticketed'];
+    profiling.groupa_names = ['black traffic offenders', 'white traffic offenders', 
+            'black drivers ticketed', 'white drivers ticketed'];
 
     profiling.presentation_colors = {'black drivers':"#ffa900",
                   'black drivers stopped':"#aa9900",
@@ -186,7 +173,6 @@ div.notes {
     // 600/690 of white drivers get a ticket = 87%
     // % white drivers stopped is 690/15865 = 4.3%
     var bars =  initialize_presentation(0.66, 0.29, 0.1, 0.29, 0.043, 0.91, 0.87);
-    // (pa, p1_a, p1_b, pr_a, pr_b, p1_ra, p1_rb)
     // var bars =  initialize_presentation(0.66, 0.35, 0.05, 0.29, 0.043, 0.91, 0.87);
 
     $("[data-slider]")

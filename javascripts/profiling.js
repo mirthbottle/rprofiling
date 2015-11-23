@@ -3,13 +3,16 @@
 // profiling.reality_names, profiling.profiled_names, profiling.groupa_names
 // profiling.presentation_colors
 // 
-
+// a and b are the demographics of people, different races or different sexes
+// 1 and 2 are whether the people really did something or not
+// r is whether they were profiled
 
 var profiling = {};
 
 profiling.reality_names = ['pa2', 'pa1', 'pb1', 'pb2'];
 profiling.profiled_names = ['pa2o', 'pa2r', 'pa1r', 'pa1o', 'pb1o', 'pb1r', 'pb2r', 'pb2o'];
-profiling.groupa_names = ['pa_1', 'pb_1', 'pa_1r', 'pb_1r'];
+profiling.reality1_names = ['pa_1', 'pb_1', 'pa_1r', 'pb_1r'];
+profiling.outcome_names = ['pa_1r', 'pb_1r'];
 
 profiling.presentation_colors = {'pa2':"#ffa900",
 				 'pa2o':"#ffa900",
@@ -53,8 +56,11 @@ function initialize_presentation(pa, p1_a, p1_b, pr_a, pr_b, p1_ra, p1_rb){
   // profiled bar
   bars['profiled'] = initialize_bar('#profiled', updated_data['profiled']);
 
+  // reality1 bar
+  bars['reality1'] = initialize_bar('#reality1', updated_data['reality1']);
+
   // groupa bar
-  bars['groupa'] = initialize_bar('#groupa', updated_data['groupa']);
+  bars['outcome'] = initialize_bar('#outcome', updated_data['outcome']);
 
   update_text(updated_data);
   return bars;
@@ -76,15 +82,15 @@ function compute_presentation_data(pa, p1_a, p1_b, pr_a, pr_b, p1_ra, p1_rb){
 
   all_data['profile_skill'] = compute_profile_skill(p1_ra, p1_rb, profiled_values);
 
-  var groupa_values = compute_groupa(reality_values, profiled_values); 
-  var ga_names = profiling.groupa_names;
-  all_data['groupa'] = [ga_names, groupa_values,
-			[[ga_names[0], ga_names[1]], 
-			 [ga_names[2], ga_names[3]]]];
+  var reality1_values = compute_reality1(reality_values); 
+  all_data['reality1'] = [profiling.reality1_names, reality1_values, [profiling.reality1_names]];
+
+  var outcome_values = compute_outcome(profiled_values);
+  all_data['outcome'] = [profiling.outcome_names, outcome_values, [profiling.outcome_names]];
 
   all_data['efficiency'] = compute_efficiency(profiled_values);
   all_data['effort'] = compute_effort(profiled_values);
-  all_data['u'] = compute_unfairness(groupa_values);
+  all_data['u'] = compute_unfairness(reality1_values, outcome_values);
 
   return all_data;
 }
@@ -126,6 +132,16 @@ function compute_profiled(pa, p1_a, p1_b, pr_a, pr_b, p1_ra, p1_rb, reality_valu
   return [+pa2o.toFixed(4), +pa2r.toFixed(4), +pa1r.toFixed(4), +pa1o.toFixed(4), +pb1o.toFixed(4), +pb1r.toFixed(4), +pb2r.toFixed(4), +pb2o.toFixed(4)];
 }
 
+function compute_outcome(profiled_values){
+  var pa1r = profiled_values[2];
+  var pb1r = profiled_values[5];
+  // p(a| (1 && r) = % of group 1 profiled that are group a
+  var pa_1r = pa1r/(pa1r + pb1r);
+  var pb_1r = 1 - pa_1r;
+
+  return [+pa_1r.toFixed(3), +pb_1r.toFixed(3)];
+}
+
 function compute_profile_skill(p1_ra, p1_rb, profiled_values){
   var pa2o = profiled_values[0];
   var pa1o = profiled_values[3];
@@ -138,19 +154,13 @@ function compute_profile_skill(p1_ra, p1_rb, profiled_values){
 }
 
 
-function compute_groupa(reality_values, profiled_values){
-  var pa1r = profiled_values[2];
-  var pb1r = profiled_values[5];
-  // p(a| (1 && r) = % of group 1 profiled that are group a
-  var pa_1r = pa1r/(pa1r + pb1r);
-  var pb_1r = 1 - pa_1r;
-
+function compute_reality1(reality_values){
   var pa1 = reality_values[1];
   var pb1 = reality_values[2];
   // % of group 1 that are group a
   var pa_1 = pa1/(pa1 + pb1);
   var pb_1 = 1 - pa_1;
-  return [+pa_1.toFixed(3), +pb_1.toFixed(3), +pa_1r.toFixed(3), +pb_1r.toFixed(3)];
+  return [+pa_1.toFixed(3), +pb_1.toFixed(3)];
 }
 
 function compute_efficiency(profiled_values){
@@ -172,9 +182,9 @@ function compute_effort(profiled_values){
   return +e.toFixed(1);
 }
 
-function compute_unfairness(groupa_values){
-  var pa_1 = groupa_values[0];
-  var pa_1r = groupa_values[2];
+function compute_unfairness(reality1_values, outcome_values){
+  var pa_1 = reality1_values[0];
+  var pa_1r = outcome_values[0];
   // unfairness
   // % overrepresentation of group a among those profiled 
   var u = (pa_1r/pa_1 - 1.0);
@@ -237,22 +247,19 @@ function update_presentation(bars) {
 }
 
 function update_bars(bars, updated_data){
-  bars['reality'].load({
-    rows: [updated_data['reality'][0], updated_data['reality'][1]],
-    unload: [updated_data['reality'][0]]
-  });
-  
-  bars['profiled'].load({
-    rows: [updated_data['profiled'][0], updated_data['profiled'][1]],
-    unload: [updated_data['profiled'][0]]
-  });
-
-  bars['groupa'].load({
-    rows: [updated_data['groupa'][0], updated_data['groupa'][1]],
-    unload: [updated_data['groupa'][0]]
-  });
+  bars['reality'] = update_bar('reality', bar['reality'], updated_data)
+  bars['profiled'] = update_bar('profiled', bar['profiled'], updated_data)
+  bars['reality1'] = update_bar('reality1', bar['reality1'], updated_data)
+  bars['outcome'] = update_bar('outcome', bar['outcome'], updated_data)
 }
 
+function update_bar(chartname, bar, updated_data){
+  b = bar.load({
+    rows: [updated_data['chartname'][0], updated_data['chartname'][1]],
+    unload: [updated_data['chartname'][0]]
+  });
+  return b
+}
 
 function update_text(updated_data){
   var p1_oa = updated_data['profile_skill'][0];
