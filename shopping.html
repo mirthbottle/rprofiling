@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Rprofiling : breaking down racial profiling">
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link href="stylesheets/simple-slider.css" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/spinner.css" rel="stylesheet" type="text/css" />
+
+    <!-- Load c3.css -->
+    <link href="javascripts/c3-0.4.8/c3.css" rel="stylesheet" type="text/css">
+    
+    <!-- Load d3.js and c3.js -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="javascripts/simple-slider.js" type="text/javascript"></script>
+    <script src="javascripts/d3.min.js" charset="utf-8"></script>
+    <script src="javascripts/c3-0.4.8/c3.min.js"></script>
+    <script src="javascripts/profiling.js"></script>
+
+    <title>Rprofiling</title>
+<style>
+button.btn-info{
+    position:relative;
+    top: 30px;
+    left: 630px;
+}
+
+div.notes {
+  font-size: 12px;
+}
+</style>
+
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" style="background-color:salmon;" href="https://github.com/mirthbottle/rprofiling">View on GitHub</a>
+
+          <h1 id="project_title">Racial Profiling</h1>
+          <h2 id="project_tagline">Explain it to me as if I liked math</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>
+	  It's no secret that African Americans are over-represented in the criminal justice system.  Based on this fact, it is widely believed that black people simply commit more crimes than white people<a href="#star">*</a>.  On its face, racial profiling seems like an efficient way to catch criminals.  However, to rephrase the obvious, racial profiling means that you will catch a <strong>higher percentage</strong> of the black criminals, causing them to be overly represented among the criminals that you catch.  This is an attempt to demonstrate that the results tend to <strong>reinforce prejudices</strong> (because human beings are not good at reasoning about probability and cause).<a href="#starstar">**</a></p>
+
+	<h1>example with shoplifting</h1>
+	
+	<h4>
+	  Yes, this is a controversial subject, but it's a simple example to demonstrate the relationship between racial profiling and stereotypes.</h4>
+	
+	<button id="reality_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#reality" onclick="toggle_collapse('#reality_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
+	<div id='reality' class="collapse in"></div>
+	<p>
+	  <input type='text' name='pa' id='pa' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100"> % black shoppers
+	  
+	<p>
+	  <input type='text' name='p1_a' id='p1_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% black shoppers shoplift
+	  <input type='text' name='p1_b' id='p1_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% white shoppers shoplift</p>
+
+	<button id="profiled_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#profiled" onclick="toggle_collapse('#profiled_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
+	<div id='profiled' class="collapse in"></div>
+	<div id='ptext'>
+	  <p><input type='text' name='pr_a' id='pr_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">%
+	  black shoppers suspected of shoplifting</p>
+	  <div class="row">
+	    <div class="col-lg-9"> The probability that a suspected black shopper actually shoplifted.</div>
+	    <div class="col-lg-2">
+	      <div class="input-group spinner">
+		<input id="p1_ra" type="text" class="form-control" onchange='update_presentation(bars)'>
+		<div class="input-group-btn-vertical">
+		  <button id="up_p1_ra" class="btn btn-default">
+		    <i class="glyphicon glyphicon-chevron-up"></i></button>
+		  <button id="down_p1_ra" class="btn btn-default">
+		    <i class="glyphicon glyphicon-chevron-down"></i></button>
+		</div>
+	      </div>
+		      
+	    </div>
+	  </div>
+	  <p>This represents how good the surveillance is at detecting shoplifting and distinguishing shoplifters from regular shoppers.</p> 
+	  <p>Compare this with <span id='p1_oa'></span>, the probability that shopper who is not flagged by surveillance actually shoplifted.</p>
+	  <p><input type='text' name='pr_b' id='pr_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">%
+	  white shoppers suspected of shoplifting</p>
+	  <div class="row">
+	    <div class="col-lg-9"> probability that a suspected white shopper actually shoplifted</div>
+	    <div class="col-lg-2">
+	      <div class="input-group spinner">
+		<input id="p1_rb" type="text" class="form-control" onchange='update_presentation(bars)'>
+		<div class="input-group-btn-vertical">
+		  <button id="up_p1_rb" class="btn btn-default">
+		    <i class="glyphicon glyphicon-chevron-up"></i></button>
+		  <button id="down_p1_rb" class="btn btn-default">
+		    <i class="glyphicon glyphicon-chevron-down"></i></button>
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	  <p>Compare this with <span id='p1_ob'></span>, the probability that a shopper who is not flagged by surveillance actually shoplifted.</p>
+	</div>
+
+	<button id="groupa_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#groupa" onclick="toggle_collapse('#groupa_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
+	<div id='groupa' class="collapse in"></div>
+	<h3>Effort: <span id ="effort"><strong> </strong></span>% shoppers profiled.  This represents the level of surveillance on shoppers.</h3>
+	<div class="notes">Profiling the minority group more than the larger group is less effort.  Then the smaller group will always be overrepresented among the shoplifters caught.</div>
+	<h3>Efficiency: <span id ="efficiency"><strong> </strong></span> shoplifters caught per person profiled</h3>
+	<div class="notes"></div>
+	<h3>Unfairness: <span id ="u"><strong> </strong></span>% overrepresentation of African Americans among caught shoplifters</h3>
+	<div class="notes">Whichever group is profiled more will be overrepresented among the shoplifters caught.  If the rate of shoplifting really is higher among black shoppers, then targeting black shoppers will be both less effort and more efficient.  If the rate of shoplifting is not actually higher, it will still be much less effort.  It would not be obvious that it is less efficient because black shoplifters will be overrepresented among those caught.</div>
+	<br><br><br>
+	<h2>Interaction With Confirmation Bias</h2>
+	
+	<p>
+	  This is a separate effect from confirmation bias, which is where you are more likely to notice "facts" that are consistent with your world view.  This result shows that even without confirmation bias, which we all have, we are likely to believe things that aren't true simply because we are <strong>also</strong> bad at reasoning about probability.</p>
+	
+      </section>
+      <section class = "inner">
+	<p id="star">
+	  <span class="glyphicon glyphicon-asterisk"></span> I'm going to show that it doesn't really matter whether it is true or not true.  If it's not true, racial profiling will make it seem true.  If it is true, racial profiling will make it seem even more true.</p>
+	<p id="starstar">
+	  <span class="glyphicon glyphicon-asterisk"></span>
+	  <span class="glyphicon glyphicon-asterisk"></span>  Other negative aspects of racial profiling are not investigated here such as how often a black person might be falsely accused.
+	</p>
+      </section>
+    </div>
+    
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+	<p class="copyright">Copyright &copy 2015 <a href="https://github.com/mirthbottle">mirthbottle</a></p>
+	<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+    
+
+
+  </body>
+  
+  <script type='text/javascript'>
+    function toggle_collapse(id){
+    if($(id + " span").hasClass('glyphicon-plus'))
+    {$(id).html('<span class="glyphicon glyphicon-minus"></span>Hide Chart'); }
+    else
+    {$(id).html('<span class="glyphicon glyphicon-plus"></span>Show Chart'); }} 
+
+    profiling.reality_names = ['black shoppers', 'black shoplifters',
+                             'white shoplifters', 'white shoppers'];
+  
+    
+    profiling.profiled_names = ['black shoppers', 'black shoppers suspected',
+            'black shoplifters caught', 'black shoplifters uncaught',
+            'white shoplifters uncaught', 'white shoplifters caught',
+            'white shoppers suspected', 'white shoppers'];
+    
+    profiling.groupa_names = ['black shoplifters', 'white shoplifters', 
+            'black shoplifters caught', 'white shoplifters caught'];
+
+    profiling.presentation_colors = {'black shoppers':"#ffa900",
+                  'black shoppers suspected':"#aa9900",
+                  'black shoplifters caught':"#607100",
+                  'black shoplifters uncaught':"#ff7100",
+                  'black shoplifters':"#999900",
+                  'white shoppers':"#6272bb",
+                  'white shoppers suspected':"#e146ba",
+                  'white shoplifters caught':"#c51b7d",
+                  'white shoplifters uncaught':"#20369e",
+                  'white shoplifters':"#c51b7d"};
+
+    var bars =  initialize_presentation(0.10, 0.05, 0.05, 0.20, 0.08, 0.20, 0.30);
+
+    $("[data-slider]")
+    .each(function () {
+    var input = $(this);
+    $("<span>")
+      .addClass("output")
+      .insertAfter($(this));
+      })
+      .bind("slider:ready slider:changed", function (event, data) {
+      $(this)
+      .nextAll(".output:first")
+      .html(data.value.toFixed(1));
+      });
+      
+      $('#up_p1_ra').on('click', function() {
+      var v = $('#p1_ra').val();
+      $('#p1_ra').val(Math.min(+v + 0.01, 1).toFixed(2));
+      update_presentation(bars);
+      });
+
+      $('#up_p1_rb').on('click', function() {
+      var v = $('#p1_rb').val();
+      $('#p1_rb').val(Math.min(+v + 0.01, 1).toFixed(2));
+      update_presentation(bars);
+      });
+
+      $('#down_p1_ra').on('click', function() {
+      var v = $('#p1_ra').val();
+      $('#p1_ra').val(Math.max(+v - 0.01, 0).toFixed(2));
+      update_presentation(bars);
+      });
+      
+      $('#down_p1_rb').on('click', function() {
+      var v = $('#p1_rb').val();
+      $('#p1_rb').val(Math.max(+v - 0.01, 0).toFixed(2));
+      update_presentation(bars);
+      });
+  </script>
+</html>
