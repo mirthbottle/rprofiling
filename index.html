@@ -105,8 +105,7 @@ div.notes {
 	Unfortunately, it's not possible from this information to determine the true rates of traffic violations.  Instead, we can backsolve the true rates of traffic violations in the case that the outcome is fair. 
 	<p>In this case, the demographics of true traffic violators should be the same as the demographics of the traffic violators that are caught and ticketed.</p>
 	<p>It's reasonable to assume that there are some white drivers who violate traffic who avoid being stopped and ticketed.  Then the true rate of offenders must be somewhat more than 4%.  Let's say it's 5%.  This implies that 35% of black drivers violate traffic.</p>
-	<input type='text' name='p1_b' id='p1_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% of white drivers violate traffic</p>
-	<input type='text' name='p1_a' id='p1_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% of black drivers violate traffic
+	
 	<p> The assumptions of the true rates of traffic violations among the drivers are displayed in the chart below.</p>
 
 	<button id="reality_btn" type="button" class="btn btn-info" data-toggle="collapse" data-target="#reality" onclick="toggle_collapse('#reality_btn')"><span class="glyphicon glyphicon-minus"></span>Hide Chart</button>
@@ -138,6 +137,8 @@ div.notes {
 	<div class="notes"></div>
 	<h2>Alternative Base Rates</h2>
 	<p> If the base rate of violating traffic for white drivers is a slightly higher rate, 7%, then 50% of black drivers violate traffic which is surely not possible.  If white drivers violate traffic at 15%, then 100% of black drivers are violating traffic.  Play with the sliders of the base rates of offending traffic.  What do you think are reasonable rates?</p>
+	<input type='text' name='p1_b' id='p1_b' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% of white drivers violate traffic</p>
+	<input type='text' name='p1_a' id='p1_a' onchange='update_presentation(bars)' data-slider="true" data-slider-step="1" data-slider-range="0, 100">% of black drivers violate traffic
 	<p> Almost certainly you find that it is more realistic for the rates of violating traffic to be more similar across demographics.  For example, lowering the rate of traffic violating for black drivers to 13% the result is that all the black drivers that violated traffic have already been caught.  If the rate for white drivers is kept at 5%, then by what percent are black drivers overrepresented among those ticketed compared to the true rates of traffic offenders?  This is the Unfairness metric.  Did the amount of Effort change?  How about Efficiency?</p>
 	<br><br><br>
 	<h2>Interaction With Confirmation Bias</h2>
